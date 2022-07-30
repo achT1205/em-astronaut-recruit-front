@@ -1,0 +1,81 @@
+.playGameContainer {
+  position: absolute;
+  z-index: 4;
+  top: 7vh;
+  right: 4vw;
+  cursor: pointer;
+}
+
+.connectWallet {
+  width: 60%;
+  height: 40px;
+  clip-path: polygon(0 0, 0 78%, 3% 100%, 100% 100%, 100% 22%, 97% 0);
+  background: #fff;
+}
+
+.connectWallet:hover {
+  animation: expandConnectWallet 0.5s forwards;
+}
+
+.connectWallet {
+  width: 200px;
+  height: 50px;
+  clip-path: polygon(0 0, 0 78%, 5% 100%, 100% 100%, 100% 22%, 95% 0);
+  background: #fff;
+  font-weight: 500;
+  letter-spacing: 3px;
+}
+
+.toast-div {
+  z-index: 9;
+}
+
+.primary-header {
+  margin-bottom: 80px;
+}
+
+.main-body .title {
+  margin-bottom: 0;
+}
+
+.buttons-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.buttons-section a {
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+}
+
+.complete-registration {
+  width: 100%;
+  max-width: 340px;
+  margin-top: 30px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.continue-website {
+  text-transform: uppercase;
+  text-decoration: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.continue-website .xicon {
+  font-size: 20px;
+}
+
+.continue-website:hover {
+  color: white;
+}
