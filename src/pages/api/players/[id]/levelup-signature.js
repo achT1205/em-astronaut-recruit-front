@@ -16,7 +16,7 @@ export default async function handler(req, res) {
             return res.status(200).json({ message: "not listed yet." });
         else
             if (!Item.canLevelUp)
-                return res.status(200).json({ message: "ot listed yet for VIP sale." });
+                return res.status(200).json({ message: "not listed yet for VIP sale." });
 
 
         const now = Math.floor(Date.now() / 1000);

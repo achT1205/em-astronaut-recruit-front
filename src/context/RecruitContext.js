@@ -238,7 +238,6 @@ export const RecruitProvider = ({ children }) => {
       setDialog(dialog)
       setIsLoading(false)
     } catch (error) {
-      debugger
       const dialog = {
         title: "Error",
         message: error.message,
@@ -651,7 +650,6 @@ export const RecruitProvider = ({ children }) => {
     }
 
     const freemintSignature = await apiClient.get(`players/${currentAccount}/free-mint-signature`);
-    debugger
     if (!freemintSignature ||
       !freemintSignature.data ||
       !freemintSignature.data.hashedMessage) {
@@ -765,7 +763,6 @@ export const RecruitProvider = ({ children }) => {
       if (now - vipSaleStartTime <= vipMintingPeriod) {
 
         const vipmintSignature = await apiClient.get(`players/${currentAccount}/vip-signature`);
-        debugger
         if (!vipmintSignature || !vipmintSignature.data || vipmintSignature.data.message) {
           const dialog = {
             title: "Not VIP member",
@@ -807,7 +804,6 @@ export const RecruitProvider = ({ children }) => {
       setDialog(dialog)
       setIsLoading(false);
     } catch (error) {
-      debugger
       const dialog = {
         title: "ERROR",
         message: error.message,
