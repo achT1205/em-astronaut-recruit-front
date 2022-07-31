@@ -106,7 +106,7 @@ export default function Registration() {
               <h2 className="title">GET A FREE NFT </h2>
 
               <p className="desc fs-large text-center fc-white tt-uppercase">
-                AWS - Register with ASTRO MUST and get free NFT for minting
+                Register with ASTRO MUST and get free NFT for minting
               </p>
 
               <p className="desc ff-secondary mtpx-40 fs-medium text-center fc-white tt-uppercase">
