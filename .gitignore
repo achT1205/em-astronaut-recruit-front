@@ -52,3 +52,6 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+recruits-exemple
+recruits-exemple1
