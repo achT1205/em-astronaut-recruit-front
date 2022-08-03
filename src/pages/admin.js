@@ -6,7 +6,9 @@ import { RecruitContext } from "../context/RecruitContext";
 import Link from 'next/link'
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Badge from 'react-bootstrap/Badge';
 
 export default function Admin() {
 
@@ -22,8 +24,30 @@ export default function Admin() {
         addOperator,
         handleChange,
         withdraw,
-        isLoading
+        isLoading,
+        formData,
+        setFormData,
+        maxLevel
     } = useContext(RecruitContext);
+
+
+
+    const increaseLevel = () => {
+        if (formData.level  === maxLevel - 1) 
+            return;
+        const data = { ...formData }
+        data.level++;
+        setFormData(data)
+    }
+
+    const decreaseLevel = () => {
+        if (formData.level === 1)
+            return;
+        const data = { ...formData }
+        data.level--;
+        setFormData(data)
+    }
+
 
     return (
         <>
@@ -81,7 +105,7 @@ export default function Admin() {
 
                 <section className="hero-banner mt-50">
                     <Container >
-                        <h4>Add a user for free mint (by pass the game)</h4>
+                        <h5>Add a user for free mint (by pass the game)</h5>
 
                         <Row>
                             <Form>
@@ -108,7 +132,7 @@ export default function Admin() {
 
                 <section className="hero-banner mt-50">
                     <Container >
-                        <h4>Add a vip user (firt 24h minting privilege)</h4>
+                        <h5>Add a vip user (firt 24h minting privilege)</h5>
 
                         <Row>
                             <Form>
@@ -136,7 +160,7 @@ export default function Admin() {
 
                 <section className="hero-banner mt-50">
                     <Container >
-                        <h4>Allow a user to level up </h4>
+                        <h5>Allow a user to level up </h5>
                         <Row>
                             <Form>
                                 <Form.Group className="mb-3" controlId="levelUpWallet">
@@ -146,6 +170,19 @@ export default function Admin() {
                                 <Form.Group className="mb-3" controlId="canLevelUp" >
                                     <Form.Check type="checkbox" label="Can levelup" onChange={(e) => handleChange(e, 'canLevelUp', 'checkbox')} />
                                 </Form.Group>
+                                {formData.canLevelUp && 
+                                
+                                
+                                
+                               <div>
+                                 <Button variant="secondary" size="lg" onClick={increaseLevel}>
+                                    +
+                                </Button>
+                                <Badge bg="secondary">{formData.level}</Badge>
+                                <Button variant="secondary" size="lg" disabled={formData.level === 1} onClick={decreaseLevel}>
+                                    -
+                                </Button>
+                                </div>}
 
                                 <div className="d-flex align-items-center justify-content-around">
                                     <a className="button --white-button" style={{ cursor: "pointer" }} onClick={addUserForLevelUp} disabled={isLoading} >
@@ -162,7 +199,7 @@ export default function Admin() {
 
                 <section className="hero-banner mt-50">
                     <Container >
-                        <h4>Add operator </h4>
+                        <h5>Add operator </h5>
                         <Row>
                             <Form>
                                 <Form.Group className="mb-3" controlId="operatoWallet">
@@ -188,7 +225,7 @@ export default function Admin() {
 
                 <section className="hero-banner mt-50">
                     <Container >
-                        <h4>Withdrow fund</h4>
+                        <h5>Withdrow fund</h5>
                         <Row>
                             <Form>
                                 <div className="d-flex align-items-center justify-content-around">

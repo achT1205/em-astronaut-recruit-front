@@ -34,7 +34,7 @@ export default async function handler(req, res) {
                 }
                 else {
 
-                    const { walletId, discordHandler, discordId, twitterHandler, twitterId, twitterProfilePicture, discordProfilePicture, hasFinishedGame, isVip, canLevelUp } = req.body
+                    const { walletId, discordHandler, discordId, twitterHandler, twitterId, twitterProfilePicture, discordProfilePicture, hasFinishedGame, isVip, canLevelUp, level } = req.body
                     let updateExpression = "SET  #updatedAt = :updatedAt";
                     let expressionAttributeNames = { "#updatedAt": "updatedAt" }
                     let expressionAttributeValues = { ":updatedAt": Date.now() }
@@ -83,6 +83,13 @@ export default async function handler(req, res) {
                         updateExpression = updateExpression + ", #canLevelUp = :canLevelUp"
                         expressionAttributeNames["#canLevelUp"] = "canLevelUp"
                     }
+
+                    if (typeof (level) != "undefined") {
+                        expressionAttributeValues[":level"] = level
+                        updateExpression = updateExpression + ", #level = :level"
+                        expressionAttributeNames["#level"] = "level"
+                    }
+
                     const params = {
                         Key: { walletId: walletId },
                         UpdateExpression: updateExpression,

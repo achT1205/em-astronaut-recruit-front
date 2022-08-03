@@ -24,8 +24,8 @@ export default async function handler(req, res) {
 
         const now = Math.floor(Date.now() / 1000);
         let messageHash = ethers.utils.solidityKeccak256(
-            ["address", "uint256"],
-            [`${id.toLowerCase()}`, now]
+            ["address", "uint256", "uint8"],
+            [`${id.toLowerCase()}`, now, 1]
         );
 
         let messageHashBinary = ethers.utils.arrayify(messageHash);

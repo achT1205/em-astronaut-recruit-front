@@ -12,9 +12,10 @@ import Link from 'next/link'
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
+import Badge from 'react-bootstrap/Badge';
 
 export default function Home() {
   const [isVideoModalVisible, setIsVideoModalVisible] = useState(false);
@@ -29,7 +30,7 @@ export default function Home() {
     buyRecuit,
     unitFormatedPrice,
     formData,
-    handleChange,
+    setFormData,
     isLoading,
     showBuyOptions,
     setShowBuyOptions
@@ -47,6 +48,22 @@ export default function Home() {
     }
     else
       setToggleRange(true)
+  }
+
+
+  const increaseAmount = () => {
+    const data = { ...formData }
+    data.amount++;
+    setFormData(data)
+  }
+
+  const decreaseAmount = () => {
+    if (formData.amount === 1)
+      return;
+
+    const data = { ...formData }
+    data.amount--;
+    setFormData(data)
   }
 
   const popover = (
@@ -168,15 +185,15 @@ export default function Home() {
               <Modal.Body>
                 <Row>
                   <Col>
-                    <Form.Group className="mb-3" controlId="amount">
-                      <Form.Control type="number" placeholder="Amount" step="1"
-                        min="1"
-                        max="10"
-                        name="amount"
-                        value={formData.amount}
-                        onChange={(e) => handleChange(e, 'amount')}
-                      />
-                    </Form.Group>
+                    <div>
+                      <Button variant="secondary" size="lg" onClick={increaseAmount}>
+                        +
+                      </Button>
+                      <Badge bg="secondary">{formData.amount}</Badge>
+                      <Button variant="secondary" size="lg" disabled={formData.amount === 1} onClick={decreaseAmount}>
+                        -
+                      </Button>
+                    </div>
                   </Col>
                   <Col>
                     <div className="d-flex align-items-center justify-content-around">

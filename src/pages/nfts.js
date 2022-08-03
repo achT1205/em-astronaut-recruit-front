@@ -7,8 +7,9 @@ import Link from 'next/link'
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Badge from 'react-bootstrap/Badge';
 
 export default function Nfts() {
     const closeDilod = () => {
@@ -24,16 +25,35 @@ export default function Nfts() {
         recruits,
         formData,
         maxLevel,
-        handleChange,
         levelUpprice,
         selectedToken,
         setSelectedToken,
         levelUp,
         payForLevelUp,
-        isLoading
+        isLoading,
+        setFormData
     } = useContext(RecruitContext);
 
     const [selectPayForLevelUp, setPayForLevelUp] = useState(null);
+
+    const increaseLevel = () => {
+        if (formData.level + selectedToken.level >= maxLevel)
+            return;
+
+        const data = { ...formData }
+        data.level++;
+        setFormData(data)
+    }
+
+    const decreaseLevel = () => {
+        if (formData.level <= 1)
+            return;
+
+        const data = { ...formData }
+        data.level--;
+        setFormData(data)
+    }
+
 
     return (
         <>
@@ -147,15 +167,13 @@ export default function Nfts() {
                         {selectPayForLevelUp && <Row>
                             <span onClick={() => setPayForLevelUp(false)} style={{ color: "white" }}>{'<< Back'}</span>
                             <Col>
-                                <Form.Group controlId="level">
-                                    <Form.Control type="number" placeholder="Level" step="1"
-                                        min="1"
-                                        max={maxLevel - selectedToken.level}
-                                        name="level"
-                                        value={formData.level}
-                                        onChange={(e) => handleChange(e, 'level')}
-                                    />
-                                </Form.Group>
+                                <Button variant="secondary" size="lg" onClick={increaseLevel}>
+                                    +
+                                </Button>
+                                <Badge bg="secondary">{formData.level}</Badge>
+                                <Button variant="secondary" size="lg" disabled={formData.level === 1} onClick={decreaseLevel}>
+                                    -
+                                </Button>
                             </Col>
                             <Col>
                                 <div className="d-flex align-items-center justify-content-around">

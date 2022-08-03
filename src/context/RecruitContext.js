@@ -73,7 +73,7 @@ export const RecruitProvider = ({ children }) => {
   const [unitPrice, setUnitPrice] = useState(null);
   const [unitFormatedPrice, setUnitFormatedPrice] = useState(null);
   const [hasFreeMinted, setHasFreeMinted] = useState(null);
-  const [formData, setFormData] = useState({ amount: 0, level: 0, freeMintWallet: null, hasFinishedGame: false, vipMintWallet: null, isVip: false });
+  const [formData, setFormData] = useState({ amount: 1, level: 1, freeMintWallet: null, hasFinishedGame: false, vipMintWallet: null, isVip: false });
   const [recruits, setRecruits] = useState(null);
   const [maxLevel, setMaxLevel] = useState(null);
   const [levelUpprice, setLevelUpprice] = useState(null);
@@ -298,7 +298,7 @@ export const RecruitProvider = ({ children }) => {
   const addUserForLevelUp = async () => {
     setDialog(null)
     setIsLoading(true)
-    const { levelUpWallet, canLevelUp } = formData;
+    const { levelUpWallet, canLevelUp, level } = formData;
 
     if (!isOperator) {
       const dialog = {
@@ -322,9 +322,20 @@ export const RecruitProvider = ({ children }) => {
       return
     }
 
+    if (level < 1 || level > maxLevel) {
+      const dialog = {
+        title: "Level error",
+        message: 'level should be : 1<= level <= 4',
+        type: 'danger'
+      }
+      setDialog(dialog)
+      setIsLoading(false)
+      return
+    }
+
     try {
 
-      await apiClient.put(`players/${levelUpWallet}`, { walletId: levelUpWallet, canLevelUp: canLevelUp })
+      await apiClient.put(`players/${levelUpWallet}`, { walletId: levelUpWallet, canLevelUp: canLevelUp, level: level })
 
       const dialog = {
         title: "White list updated",
@@ -858,7 +869,7 @@ export const RecruitProvider = ({ children }) => {
     }
 
     const levelUpSignature = await apiClient.get(`players/${currentAccount}/levelup-signature`);
-    let hashedMessage, signature, timestamp;
+    let hashedMessage, signature, timestamp, level;
     if (!levelUpSignature ||
       !levelUpSignature.data ||
       !levelUpSignature.data.hashedMessage) {
@@ -878,6 +889,7 @@ export const RecruitProvider = ({ children }) => {
       hashedMessage = levelUpSignature.data.hashedMessage;
       signature = levelUpSignature.data.signature;
       timestamp = levelUpSignature.data.timestamp;
+      level = levelUpSignature.data.level;
     }
 
     try {
@@ -887,7 +899,8 @@ export const RecruitProvider = ({ children }) => {
         messageHashBinary,
         signature,
         timestamp,
-        selectedToken.id);
+        selectedToken.id, 
+        level);
       setIsLoading(true);
       console.log(`Loading - ${transaction.hash}`);
       await transaction.wait();
@@ -1023,31 +1036,32 @@ export const RecruitProvider = ({ children }) => {
         let array;
         const recruits = []
         if (tokens && tokens.length > 0) {
-          if (tokens.length > 30 && isOperator)
-            array = tokens.slice(10)
+          if (tokens.length > 30 && isOperator) {
+            //array = tokens.slice(10) 
+          }
           else
             array = tokens
-
-          array.forEach(async (token) => {
-            const level = await recruitContract.recuitToLevel(token.toNumber())
-            const wasFreeMinted = await recruitContract.isFreeToken(token.toNumber())
-            let url;
-            if (!revealed) {
-              url = await recruitContract.tokenURI(token.toNumber())
-            } else {
-              const uri = await recruitContract.tokenURI(token.toNumber());
-              const jsonUrl = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
-              const metadata = await axios.get(jsonUrl)
-              url = metadata.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")
-            }
-            recruits.push({
-              id: token.toNumber(),
-              level: level,
-              wasFreeMinted: wasFreeMinted,
-              url: url
-            })
-            setRecruits(recruits)
-          });
+          if (array && array.length)
+            array.forEach(async (token) => {
+              const level = await recruitContract.recuitToLevel(token.toNumber())
+              const wasFreeMinted = await recruitContract.isFreeToken(token.toNumber())
+              let url;
+              if (!revealed) {
+                url = await recruitContract.tokenURI(token.toNumber())
+              } else {
+                const uri = await recruitContract.tokenURI(token.toNumber());
+                const jsonUrl = uri.replace("ipfs://", "https://ipfs.io/ipfs/");
+                const metadata = await axios.get(jsonUrl)
+                url = metadata.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")
+              }
+              recruits.push({
+                id: token.toNumber(),
+                level: level,
+                wasFreeMinted: wasFreeMinted,
+                url: url
+              })
+              setRecruits(recruits)
+            });
 
         }
         const maxLevel = await recruitContract.maxLevel();
@@ -1131,7 +1145,8 @@ export const RecruitProvider = ({ children }) => {
         addUserForLevelUp,
         addOperator,
         setShowBuyOptions,
-        withdraw
+        withdraw,
+        setFormData
       }}
     >
       {children}
