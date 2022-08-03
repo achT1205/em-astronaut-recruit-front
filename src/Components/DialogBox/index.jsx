@@ -12,7 +12,7 @@ const DialogBox = ({ closeDilod, dialog }) => {
           <Toast.Body>
             {dialog.message}
             {dialog.message === "did not complete profile yet." && (
-              <Link href="/">{"  Go to Registration"}</Link>
+              <Link href="/registration">{"  Go to Registration"}</Link>
             )}
           </Toast.Body>
         </Toast>
