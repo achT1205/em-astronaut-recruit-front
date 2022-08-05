@@ -152,7 +152,7 @@ export default function Home() {
 
               <div className="banner-buttons">
                 <div className="d-flex align-items-center justify-content-around">
-                  <a className="button --white-button" onClick={() => setShowBuyOptions(true)}>
+                  <a className="button --white-button d-none" onClick={() => setShowBuyOptions(true)}>
                     <img src="/images/white-button.svg" alt="" />
                     <span className="text d-flex align-items-center justify-content-center">
                       <span className="" style={{ cursor: "pointer" }}>MINT</span>
