@@ -6,7 +6,7 @@ const AvatarSlider = () => {
     dots: false,
     infinite: false,
     speed: 500,
-    slidesToShow: 5,
+    slidesToShow: 4,
     slidesToScroll: 4,
     initialSlide: 0,
     responsive: [
@@ -41,8 +41,6 @@ const AvatarSlider = () => {
     <div>
       <Slider {...settings} className="avatar-slider">
         <img src="/images/cadet-avatar.png" alt="Cadet" />
-
-        <img src="/images/cadet-avatar1.png" alt="Cadet" />
 
         <img src="/images/private-avatar.png" alt="Private" />
 

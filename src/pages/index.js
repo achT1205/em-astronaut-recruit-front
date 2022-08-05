@@ -2,7 +2,6 @@ import Head from "next/head";
 import { useState, useContext } from "react";
 import ModalVideo from "react-modal-video";
 import { AvatarSlider } from "../Components";
-import { LevelSlider } from "../Components";
 import { FaqSection } from "../Components";
 import { RecruitContext } from "../context/RecruitContext";
 import { Loader, DialogBox } from "../Components/index";
@@ -245,17 +244,24 @@ export default function Home() {
                   It&apos;s time! Hone your skills and prepare yourselves for the future. The Recruit Collection is a Free Mint for ALL, and your entry pass into the Astro Must ecosystem. <br /><br />
                   <strong>10k (Alpha Recruit Batch) units - 1 free mint + gas per wallet. </strong> <br />
                   Your training has already started. The first test in becoming a Recruit <strong>- Honesty & Integrity!</strong> <br /><br />
-                  <i>We are holding 1999 Recruit NFTs for those who are proven worthy.</i> <br /><br />
                   Once you mint your Recruit, you &apos;MUST&apos; join us on discord to rank up your Recruit to Lieutenant! <br /><br />
                   We are waiting for you….
                 </p>
+                
+                <div className="mtpx-30">
+                    <a className="button --white-button m-auto" href="https://discord.com/invite/astromust">
+                        <img src="/images/white-button.svg" alt="" />
+                        <span className="text">Connect Discord</span>
+                    </a>
+                </div>
+
               </div>
 
               <div className="col-md-5 offset-md-1">
                 <div className="recruit-video">
                   <ModalVideo
                     channel="custom"
-                    url="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
+                    url="https://youtu.be/Ntr8xMwZPIE"
                     isOpen={isVideoModalVisible}
                     onClose={() => setIsVideoModalVisible(false)}
                   />
@@ -357,7 +363,20 @@ export default function Home() {
             </div>
 
             <div className="d-none d-md-block">
-              <LevelSlider />
+              <div className="row">
+                  <div className="col-lg-3 col-md-6">
+                      <img src="/images/avatar-img1.png" alt="" className="m-auto" />
+                  </div>
+                  <div className="col-lg-3 col-md-6">
+                      <img src="/images/avatar-img2.png" alt="" className="m-auto" />
+                  </div>
+                  <div className="col-lg-3 col-md-6">
+                      <img src="/images/avatar-img3.png" alt="" className="m-auto" />
+                  </div>
+                  <div className="col-lg-3 col-md-6">
+                      <img src="/images/avatar-img4.png" alt="" className="m-auto" />
+                  </div>
+              </div>
             </div>
 
             <div className="d-block d-md-none">
@@ -377,6 +396,26 @@ export default function Home() {
           </article>
         </section>
 
+
+        <section className="avatar-section sec-padding">
+          <article className="container">
+            <div className="row align-items-center">
+              <div className="col-md-7">
+                <h2 className="maintitle">HOW TO MINT</h2>
+                <p className="maindesc">
+                    -   5/08/2022 - 24hr early access to holders of WL spots  <br />
+                    -   6/08/2022 - Play to Mint live <br />
+                    -   Mint Recruit (pfp only) - you can mint free through the game or buy a Recruit <br />
+                    -   Complete registration through the website <br />
+                    -   Upgrade Recruit to Lieutenant through discord activities <br />
+                    -   All collection holders will be airdropped a 3D fully rigged avatar soon.
+                </p>
+              </div>
+            </div>
+
+          </article>
+        </section>
+
         <section className="goals-section sec-padding">
           <div className="container">
             <article className="">
@@ -391,7 +430,7 @@ export default function Home() {
             <AvatarSlider />
 
             <div className="mtpx-40">
-              <Link href="/">
+              <Link href="https://astromust.gsc.im/1/twitter">
                 <a className="button --white-button m-auto">
                   <img src="/images/white-button.svg" alt="" />
                   <span className="text">Start Playing</span>
