@@ -247,12 +247,12 @@ export default function Home() {
                   Once you mint your Recruit, you &apos;MUST&apos; join us on discord to rank up your Recruit to Lieutenant! <br /><br />
                   We are waiting for you….
                 </p>
-                
+
                 <div className="mtpx-30">
-                    <a className="button --white-button m-auto" href="https://discord.com/invite/astromust">
-                        <img src="/images/white-button.svg" alt="" />
-                        <span className="text">Connect Discord</span>
-                    </a>
+                  <a className="button --white-button m-auto" href="https://discord.com/invite/astromust">
+                    <img src="/images/white-button.svg" alt="" />
+                    <span className="text">Connect Discord</span>
+                  </a>
                 </div>
 
               </div>
@@ -364,18 +364,18 @@ export default function Home() {
 
             <div className="d-none d-md-block">
               <div className="row">
-                  <div className="col-lg-3 col-md-6">
-                      <img src="/images/avatar-img1.png" alt="" className="m-auto" />
-                  </div>
-                  <div className="col-lg-3 col-md-6">
-                      <img src="/images/avatar-img2.png" alt="" className="m-auto" />
-                  </div>
-                  <div className="col-lg-3 col-md-6">
-                      <img src="/images/avatar-img3.png" alt="" className="m-auto" />
-                  </div>
-                  <div className="col-lg-3 col-md-6">
-                      <img src="/images/avatar-img4.png" alt="" className="m-auto" />
-                  </div>
+                <div className="col-lg-3 col-md-6">
+                  <img src="/images/avatar-img1.png" alt="" className="m-auto" />
+                </div>
+                <div className="col-lg-3 col-md-6">
+                  <img src="/images/avatar-img2.png" alt="" className="m-auto" />
+                </div>
+                <div className="col-lg-3 col-md-6">
+                  <img src="/images/avatar-img3.png" alt="" className="m-auto" />
+                </div>
+                <div className="col-lg-3 col-md-6">
+                  <img src="/images/avatar-img4.png" alt="" className="m-auto" />
+                </div>
               </div>
             </div>
 
@@ -403,12 +403,12 @@ export default function Home() {
               <div className="col-md-7">
                 <h2 className="maintitle">HOW TO MINT</h2>
                 <p className="maindesc">
-                    -   5/08/2022 - 24hr early access to holders of WL spots  <br />
-                    -   6/08/2022 - Play to Mint live <br />
-                    -   Mint Recruit (pfp only) - you can mint free through the game or buy a Recruit <br />
-                    -   Complete registration through the website <br />
-                    -   Upgrade Recruit to Lieutenant through discord activities <br />
-                    -   All collection holders will be airdropped a 3D fully rigged avatar soon.
+                  -   5/08/2022 - 24hr early access to holders of WL spots  <br />
+                  -   6/08/2022 - Play to Mint live <br />
+                  -   Mint Recruit (pfp only) - you can mint free through the game or buy a Recruit <br />
+                  -   Complete registration through the website <br />
+                  -   Upgrade Recruit to Lieutenant through discord activities <br />
+                  -   All collection holders will be airdropped a 3D fully rigged avatar soon.
                 </p>
               </div>
             </div>
