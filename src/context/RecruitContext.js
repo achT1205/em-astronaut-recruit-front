@@ -84,7 +84,7 @@ export const RecruitProvider = ({ children }) => {
   const [isOperator, setIsOperator] = useState(null);
 
 
-  const logOut = (redirect = false, to = '/') => {
+  const logOut = (redirect = false, to = '/registration') => {
     if (redirect)
       signOut({ redirect: redirect, callbackUrl: to })
     else
