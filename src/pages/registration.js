@@ -155,7 +155,7 @@ export default function Registration() {
                     ((discordUser && discordUser.id) || session && session.token && session.token.provider === 'discord') &&
                     <a className="outline-button blue-button">
                       <i className="xicon">
-                        <img src="/images/twitter-image.png" alt="" />
+                        <img src="/images/discord-image.png" alt="" />
                       </i>
                       {(discordUser && discordUser.id) ? `${discordUser.username}` : session.token.name}
                       {(discordUser && discordUser.picture) && <img src={discordUser.picture} alt="Avatar" className="avatar"></img>}
@@ -166,7 +166,7 @@ export default function Registration() {
                     ((!discordUser || !discordUser.id) && (!session || !session.token || session.token.provider !== 'discord')) &&
                     <a className="outline-button blue-button" onClick={() => handleSignIn('discord')}>
                       <i className="xicon">
-                        <img src="/images/twitter-image.png" alt="" />
+                        <img src="/images/discord-image.png" alt="" />
                       </i>
                       CONNECT DISCORD
                     </a>
