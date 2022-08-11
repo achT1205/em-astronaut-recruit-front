@@ -82,10 +82,11 @@ export const RecruitProvider = ({ children }) => {
   const [vipSaleStartTime, setVipSaleStartTime] = useState(null);
   const [vipMintingPeriod, setVipMintingPeriod] = useState(null);
   const [isOperator, setIsOperator] = useState(null);
+  const [availableFreeLevel, setAvailableFreeLevel] = useState(null);
 
 
   const handleTokenSelection = (item) => {
-    if(item && item.level === maxLevel){
+    if (item && item.level === maxLevel) {
       const dialog = {
         title: "MAX LEVEL REACHED",
         message: 'This recruit is already a LIEUTENANT',
@@ -913,14 +914,16 @@ export const RecruitProvider = ({ children }) => {
         signature,
         timestamp,
         selectedToken.id,
-        level);
+        1);
       setIsLoading(true);
       console.log(`Loading - ${transaction.hash}`);
       await transaction.wait();
       console.log(`Success - ${transaction.hash}`);
+      const currentLevel = parseInt(level) - 1;
       await apiClient.put(`/players/${currentAccount}`, {
         walletId: currentAccount,
-        canLevelUp: false
+        canLevelUp: currentLevel > 0 ? true : false,
+        level: currentLevel
       })
       await loadNftInfo(currentAccount)
       setIsLoading(false);
@@ -1078,7 +1081,6 @@ export const RecruitProvider = ({ children }) => {
 
               setRecruits(recruits)
             });
-
         }
         const maxLevel = await recruitContract.maxLevel();
         setMaxLevel(maxLevel)
@@ -1087,6 +1089,11 @@ export const RecruitProvider = ({ children }) => {
         setUnitFormatedPrice(ethers.utils.formatUnits(price.toString(), "ether"))
         const levelUpprice = await recruitContract.levelUpprice()
         setLevelUpprice(ethers.utils.formatEther(levelUpprice, { pad: true }))
+
+        const resp = await apiClient.get(`players/${account}/levelup-signature`);
+        if (resp, resp.data) {
+          setAvailableFreeLevel(resp.data.level)
+        }
       }
       else {
         const dialog = {
@@ -1141,6 +1148,7 @@ export const RecruitProvider = ({ children }) => {
         selectedToken,
         showBuyOptions,
         isOperator,
+        availableFreeLevel,
         connectWallet,
         completeRegistration,
         setDiscordUser,
