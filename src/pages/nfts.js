@@ -31,6 +31,7 @@ export default function Nfts() {
         levelUp,
         payForLevelUp,
         isLoading,
+        availableFreeLevel,
         setFormData
     } = useContext(RecruitContext);
 
@@ -142,10 +143,11 @@ export default function Nfts() {
                             <span onClick={() => handleTokenSelection(null)} style={{ color: "white" }}>{'<< Back'}</span>
                             <Col>
                                 <div className="d-flex align-items-center justify-content-around">
-                                    <a className="button --white-button" onClick={levelUp} disabled={isLoading} >
+                                     <Badge bg="secondary">{availableFreeLevel == 4 ? "LIEUTENANT GRADE AVAILABLE" : availableFreeLevel == 3 ? "2ND OFFICER GRADE AVAILABLE" : availableFreeLevel == 2 ? "1ST OFFICER GRADE AVAILABLE" : "NO FREE UPGRADE AVAILABE"}</Badge>
+                                    <a className="button --white-button" onClick={levelUp} disabled={isLoading || !availableFreeLevel} >
                                         <img src="/images/white-button.svg" alt="" />
                                         <span className="text d-flex align-items-center justify-content-center">
-                                            <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'Level up'}</span>
+                                            <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'UPGRADE'}</span>
                                         </span>
                                     </a>
                                 </div>
@@ -156,7 +158,7 @@ export default function Nfts() {
                                     <a className="button --white-button" disabled={isLoading} onClick={() => setPayForLevelUp(true)}>
                                         <img src="/images/white-button.svg" alt="" />
                                         <span className="text d-flex align-items-center justify-content-center">
-                                            <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'Pay For Level Up'}</span>
+                                            <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'Pay For UPGRADE'}</span>
                                         </span>
                                     </a>
                                 </div>
