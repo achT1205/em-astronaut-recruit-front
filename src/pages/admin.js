@@ -6,9 +6,7 @@ import { RecruitContext } from "../context/RecruitContext";
 import Link from 'next/link'
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Badge from 'react-bootstrap/Badge';
 
 export default function Admin() {
 
@@ -25,29 +23,8 @@ export default function Admin() {
         handleChange,
         withdraw,
         isLoading,
-        formData,
-        setFormData,
-        maxLevel
+        formData
     } = useContext(RecruitContext);
-
-
-
-    const increaseLevel = () => {
-        if (formData.level  === maxLevel - 1) 
-            return;
-        const data = { ...formData }
-        data.level++;
-        setFormData(data)
-    }
-
-    const decreaseLevel = () => {
-        if (formData.level === 1)
-            return;
-        const data = { ...formData }
-        data.level--;
-        setFormData(data)
-    }
-
 
     return (
         <>
@@ -170,19 +147,20 @@ export default function Admin() {
                                 <Form.Group className="mb-3" controlId="canLevelUp" >
                                     <Form.Check type="checkbox" label="Can levelup" onChange={(e) => handleChange(e, 'canLevelUp', 'checkbox')} />
                                 </Form.Group>
-                                {formData.canLevelUp && 
-                                
-                                
-                                
-                               <div>
-                                 <Button variant="secondary" size="lg" onClick={increaseLevel}>
-                                    +
-                                </Button>
-                                <Badge bg="secondary">{formData.level}</Badge>
-                                <Button variant="secondary" size="lg" disabled={formData.level === 1} onClick={decreaseLevel}>
-                                    -
-                                </Button>
-                                </div>}
+                                {
+
+                                    formData.canLevelUp &&
+
+                                    <Form.Group className="mb-3">
+                                        <Form.Label>Select a level </Form.Label>
+                                        <Form.Select onChange={(e) => handleChange(e, 'level')} >
+                                            <option>Select a level</option>
+                                            <option value="2">1ST OFFICER</option>
+                                            <option value="3">2ND OFFICER</option>
+                                            <option value="4">LIEUTENANT</option>
+                                        </Form.Select>
+                                    </Form.Group>
+                                }
 
                                 <div className="d-flex align-items-center justify-content-around">
                                     <a className="button --white-button" style={{ cursor: "pointer" }} onClick={addUserForLevelUp} disabled={isLoading} >
