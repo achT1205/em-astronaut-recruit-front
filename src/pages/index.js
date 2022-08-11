@@ -114,24 +114,24 @@ export default function Home() {
                   <img src="/images/white-button.svg" alt="" />
                   <span className="text">Connect wallet</span>
                 </a> :
-                  <a className="start-button button --white-button" style={{ cursor: "pointer" }}>
-                    <>
-                      <img src="/images/white-button.svg" alt="" />
-                      <span className="text">{shortAddress}</span>
-                    </>
-                  </a>
+                  // <a className="start-button button --white-button" style={{ cursor: "pointer" }}>
+                  //   <>
+                  //     <img src="/images/white-button.svg" alt="" />
+                  //     <span className="text">{shortAddress}</span>
+                  //   </>
+                  // </a>
 
-                  // <OverlayTrigger
-                  //   placement="right"
-                  //   overlay={popover}
-                  // >
-                  //   <a onClick={() => push('/nfts')} className="start-button button --white-button" style={{ cursor: "pointer" }}>
-                  //     <>
-                  //       <img src="/images/white-button.svg" alt="" />
-                  //       <span className="text">{shortAddress}</span>
-                  //     </>
-                  //   </a>
-                  // </OverlayTrigger>
+                  <OverlayTrigger
+                    placement="right"
+                    overlay={popover}
+                  >
+                    <a onClick={() => push('/nfts')} className="start-button button --white-button" style={{ cursor: "pointer" }}>
+                      <>
+                        <img src="/images/white-button.svg" alt="" />
+                        <span className="text">{shortAddress}</span>
+                      </>
+                    </a>
+                  </OverlayTrigger>
                 }
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function Home() {
 
               <div className="banner-buttons">
                 <div className="d-flex align-items-center justify-content-around">
-                  <a className="button --white-button d-none" onClick={() => setShowBuyOptions(true)}>
+                  <a className="button --white-button" onClick={() => setShowBuyOptions(true)}>
                     <img src="/images/white-button.svg" alt="" />
                     <span className="text d-flex align-items-center justify-content-center">
                       <span className="" style={{ cursor: "pointer" }}>MINT</span>
