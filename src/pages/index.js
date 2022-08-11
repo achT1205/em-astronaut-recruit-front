@@ -163,61 +163,81 @@ export default function Home() {
 
           <Modal show={showBuyOptions} onHide={() => setShowBuyOptions(false)} animation={false} backdrop="static">
             <Modal.Header closeButton>
-              <Row>
+              
+            </Modal.Header>
+            <Modal.Body>
+            <Row>
+                <Col>
+                  <h5 className="fc-white tt-uppercase ls-large text-center mbpx-20">RECRUIT NFT</h5>
+                </Col>
+              </Row>
+                <Row>
                 <Col>
                   <div className="d-flex align-items-center justify-content-around">
-                    <a className="button --white-button" disabled={isLoading} onClick={() => handleFreeMintChoice('free')}>
-                      <img src="/images/white-button.svg" alt="" />
-                      <span className="text d-flex align-items-center justify-content-center">
-                        <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'Loading ...' : 'Claim a free NFT'}</span>
+                    <a className="button" disabled={isLoading} onClick={() => handleFreeMintChoice('free')}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="210" height="48" viewBox="0 0 291 70">
+                          <g id="Path_22691" data-name="" fill="rgba(77,255,255,0.48)">
+                            <path d="M 290.5 59.5 L 15.16070938110352 59.5 L 0.5 44.79335021972656 L 0.5 0.5 L 275.7822265625 0.5 L 290.5 16.32163619995117 L 290.5 59.5 Z" stroke="none"></path>
+                            <path d="M 1 1 L 1 44.58668518066406 L 15.36825561523438 59 L 290 59 L 290 16.51826095581055 L 275.564453125 1 L 1 1 M 0 0 L 276 0 L 291 16.12503814697266 L 291 60 L 14.953125 60 L 0 45 L 0 0 Z" stroke="none" fill="#4dffff"></path>
+                          </g>
+                      </svg>
+                      <span className="d-flex align-items-center justify-content-center">
+                        <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'Loading ...' : 'CLAIM ONE FREE NFT'}</span>
                       </span>
                     </a>
                   </div>
                 </Col>
                 <Col>
                   <div className="d-flex align-items-center justify-content-around">
-                    <a className="button --white-button" onClick={() => handleFreeMintChoice('buy')}>
-                      <img src="/images/white-button.svg" alt="" />
-                      <span className="text d-flex align-items-center justify-content-center">
-                        <span className="" style={{ cursor: "pointer" }}>Buy a recruit</span>
+                    <a className="button" onClick={() => handleFreeMintChoice('buy')}>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
+                          <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
+                            <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
+                            <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
+                          </g>
+                        </svg>
+
+                      <span className="d-flex align-items-center justify-content-center">
+                        <span className="text fc-white" style={{ cursor: "pointer" }}>BUY NFT</span>
                       </span>
                     </a>
                   </div>
                 </Col>
               </Row>
-            </Modal.Header>
+            </Modal.Body>
             {showRange &&
               <Modal.Body>
-                <Row>
-                  <Col>
-                    <div>
-                      <Button variant="secondary" size="lg" onClick={increaseAmount}>
-                        +
-                      </Button>
-                      <Badge bg="secondary">{formData.amount}</Badge>
-                      <Button variant="secondary" size="lg" disabled={formData.amount === 1} onClick={decreaseAmount}>
+                <div className="align-items-center flex-col">
+                  
+                    <div className="modal-counter">
+                      <Button variant="" size="lg" disabled={formData.amount === 1} onClick={decreaseAmount}>
                         -
                       </Button>
-                    </div>
-                  </Col>
-                  <Col>
-                    <div className="d-flex align-items-center justify-content-around">
-                      <a className="button --white-button">
-                        <img src="/images/white-button.svg" alt="" />
-                        <span className="text d-flex align-items-center justify-content-center">
-                          <span className="">{(formData.amount * unitFormatedPrice).toFixed(4)} ETH</span>
-                        </span>
-                      </a>
-                    </div>
-                  </Col>
 
-                </Row>
+                      <Badge bg="">{formData.amount}</Badge>
+                      
+                      <Button variant="" size="lg" onClick={increaseAmount}>
+                        +
+                      </Button>
+                    </div>
+                  
+
+                    <div className="d-flex align-items-center justify-content-around">
+                      <div className="mb-3">
+                        <span className="d-flex align-items-center justify-content-center">
+                          <span className="fc-primary counter-text">{(formData.amount * unitFormatedPrice).toFixed(4)} ETH</span>
+                        </span>
+                      </div>
+                    </div>
+                  
+
+                </div>
                 <Row>
                   <div className="d-flex align-items-center justify-content-around">
                     <a className="button --white-button" disabled={isLoading} onClick={buyRecuit}>
                       <img src="/images/white-button.svg" alt="" />
                       <span className="text d-flex align-items-center justify-content-center">
-                        <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'Loading ...' : 'Submit'}</span>
+                        <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'Loading ...' : 'BUY A RECRUIT'}</span>
                       </span>
                     </a>
                   </div>
@@ -247,15 +267,14 @@ export default function Home() {
               <div className="col-md-6">
                 <h2 className="maintitle">THE COLLECTION</h2>
                 <p className="maindesc">
-                  It&apos;s time! Hone your skills and prepare yourselves for the future. The Recruit Collection is a Free Mint for ALL, and your entry pass into the Astro Must ecosystem. <br /><br />
-                  <strong>10k (Alpha Recruit Batch) units - 1 free mint + gas per wallet. </strong> <br />
-                  Your training has already started. The first test in becoming a Recruit <strong>- Honesty & Integrity!</strong> <br /><br />
-                  Once you mint your Recruit, you &apos;MUST&apos; join us on discord to rank up your Recruit to Lieutenant! <br /><br />
+                  It's time! Hone your skills and prepare yourselves for the future. The Recruit Collection is a Free Mint for ALL, and your entry pass into the Astro Must ecosystem. <br /><br />
+                  <strong>1 free mint + gas per wallet. </strong> <br />
+                  Once you mint your Recruit, you 'MUST' join us on discord to rank up your Recruit to Lieutenant! <br /><br />
                   We are waiting for you….
                 </p>
 
                 <div className="mtpx-30">
-                  <a className="button --white-button m-auto" href="https://discord.com/invite/astromust">
+                  <a className="button --white-button d-inline-flex" href="https://discord.com/invite/astromust">
                     <img src="/images/white-button.svg" alt="" />
                     <span className="text">Connect Discord</span>
                   </a>
@@ -267,7 +286,7 @@ export default function Home() {
                 <div className="recruit-video">
                   <ModalVideo
                     channel="custom"
-                    url="https://youtu.be/Ntr8xMwZPIE"
+                    url="https://www.youtube.com/embed/Ntr8xMwZPIE"
                     isOpen={isVideoModalVisible}
                     onClose={() => setIsVideoModalVisible(false)}
                   />
@@ -280,7 +299,7 @@ export default function Home() {
                         setIsVideoModalVisible(true);
                       }}
                     >
-                      <img src="/images/recruit-video.png" />
+                    <img src="/images/recruit-video.png" alt="" />
                     </a>
                   </div>
                 </div>
@@ -403,24 +422,99 @@ export default function Home() {
         </section>
 
 
-        <section className="avatar-section sec-padding">
-          <article className="container">
+        <section className="benefits-section sec-padding">
+          <div className="container">
+            <article className="">
+              <h2 className="maintitle">HOW TO MINT</h2>
+            </article>
             <div className="row align-items-center">
-              <div className="col-md-7">
-                <h2 className="maintitle">HOW TO MINT</h2>
-                <p className="maindesc">
-                  -   5/08/2022 - 24hr early access to holders of WL spots  <br />
-                  -   6/08/2022 - Play to Mint live <br />
-                  -   Mint Recruit (pfp only) - you can mint free through the game or buy a Recruit <br />
-                  -   Complete registration through the website <br />
-                  -   Upgrade Recruit to Lieutenant through discord activities <br />
-                  -   All collection holders will be airdropped a 3D fully rigged avatar soon.
-                </p>
+              <div className="col-md-6">
+                <div className="benefit-box">
+                  <i className="xicon">
+                    <img src="/images/how-mint-icon1.png" alt="" className="m-auto" />
+                  </i>
+                  <div className="content">
+                    <h4 className="title tt-uppercase">13/08/2022</h4>
+                    <p className="desc">
+                      24hr early access to holders of WL spots
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="benefit-box">
+                  <i className="xicon">
+                    <img src="/images/how-mint-icon2.png" alt="" className="m-auto" />
+                  </i>
+                  <div className="content">
+                    <h4 className="title tt-uppercase">14/08/2022</h4>
+                    <p className="desc">
+                      Play to Mint live
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="benefit-box">
+                  <i className="xicon">
+                    <img src="/images/how-mint-icon3.png" alt="" className="m-auto" />
+                  </i>
+                  <div className="content">
+                    <h4 className="title tt-uppercase">Mint Recruit</h4>
+                    <p className="desc">
+                      Mint Recruit (pfp only) - you can mint free through the game or buy a Recruit.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="benefit-box">
+                  <i className="xicon">
+                    <img src="/images/how-mint-icon4.png" alt="" className="m-auto" />
+                  </i>
+                  <div className="content">
+                    <h4 className="title tt-uppercase">Registration</h4>
+                    <p className="desc">
+                      Complete registration through the website
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="benefit-box">
+                  <i className="xicon">
+                    <img src="/images/how-mint-icon5.png" alt="" className="m-auto" />
+                  </i>
+                  <div className="content">
+                    <h4 className="title tt-uppercase">Upgrade recruit</h4>
+                    <p className="desc">
+                      Upgrade Recruit to Lieutenant through discord activities
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="col-md-6">
+                <div className="benefit-box">
+                  <i className="xicon">
+                    <img src="/images/how-mint-icon6.png" alt="" className="m-auto" />
+                  </i>
+                  <div className="content">
+                    <h4 className="title tt-uppercase">Avatar</h4>
+                    <p className="desc">
+                      All collection holders will receive a 3D fully rigged avatar soon.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-
-          </article>
+          </div>
         </section>
+
 
         <section className="goals-section sec-padding">
           <div className="container">

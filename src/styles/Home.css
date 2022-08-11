@@ -11436,7 +11436,7 @@ ul.grid-block {
     right: 0;
     top: 50%;
     text-align: center;
-    color: #000000;
+    font-size: 16px;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
     -o-transform: translateY(-50%);
