@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Badge from 'react-bootstrap/Badge';
@@ -27,11 +28,10 @@ export default function Nfts() {
         maxLevel,
         levelUpprice,
         selectedToken,
-        handleTokenSelection,
+        setSelectedToken,
         levelUp,
         payForLevelUp,
         isLoading,
-        availableFreeLevel,
         setFormData
     } = useContext(RecruitContext);
 
@@ -68,10 +68,7 @@ export default function Nfts() {
                     className="background-bg"
                     style={{ backgroundImage: "url(./images/background-banner.jpg)" }}
                 ></div>
-                <header
-                    className="primary-header"
-                    style={{ backgroundImage: "url(./images/header-lens.png)" }}
-                >
+                <header className="primary-header">
                     <div className="container">
                         <div className="row align-items-start">
                             <div className="col-md-4">
@@ -111,43 +108,62 @@ export default function Nfts() {
                 <section className="hero-banner">
                     <Container>
                         <Row>
+                            <h4 className="text-center fc-white ls-large">PROFILE</h4>
                             {
                                 recruits &&
                                 recruits.map((recruit) => (
 
-                                    <Col key={recruit.id} onClick={() => handleTokenSelection(recruit)}>
-                                        <Card style={{ width: '18rem' }}
-                                            bg={selectedToken && selectedToken.id == recruit.id ? 'light' : 'dark'}
-                                            text={selectedToken && selectedToken.id == recruit.id ? 'dark' : 'white'}
-                                            border={selectedToken && selectedToken.id == recruit.id ? 'primary' : ''}
+                                    <Col className="mtpx-20" key={recruit.id}>
+                                        <Card className="nft-card"
+                                            bg={selectedToken && selectedToken.id == recruit.id ? '' : ''}
+                                            text={selectedToken && selectedToken.id == recruit.id ? '' : ''}
+                                            border={selectedToken && selectedToken.id == recruit.id ? '' : ''}
                                         >
                                             <Card.Img src={recruit.url} alt="Card image" />
-                                            <Card.ImgOverlay>
-                                                <Card.Title> ID : {recruit.id}</Card.Title>
-                                                <Card.Title> Title : {recruit.title}</Card.Title>
-                                                <Card.Text> LELEV : {recruit.level}
-                                                </Card.Text>
-                                            </Card.ImgOverlay>
+                                            <Card.Body>
+                                                <Card.Title className="fc-primary fw-bold"> ID : {recruit.id}</Card.Title>
+                                                <Card.Text className="fc-white"> LELEV : {recruit.level} </Card.Text>
+                                            </Card.Body>
                                         </Card>
+
+                                        <a className="button d-inline-flex" onClick={() => setSelectedToken(recruit)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
+                                              <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
+                                                <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
+                                                <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
+                                              </g>
+                                            </svg>
+                                             <span className="d-flex align-items-center justify-content-center">
+                                                <span className="text fc-white" style={{ cursor: "pointer" }}>UPGRADE</span>
+                                              </span>
+                                        </a>
                                     </Col>
 
                                 ))
                             }
-                            {(!recruits || recruits.length === 0) && <h4 style={{ color: "white" }}>YOU DO NO HAVE ANY RECRUIT YET</h4>}
+                            {(!recruits || recruits.length === 0) && <h6 style={{ color: "white" }} className="mtpx-60 text-center">YOU DO NO HAVE ANY RECRUIT YET</h6>}
+
                         </Row>
                     </Container>
 
 
                     <Container className="mt-50">
-                        {(selectedToken && selectedToken.id && !selectPayForLevelUp) && <Row>
-                            <span onClick={() => handleTokenSelection(null)} style={{ color: "white" }}>{'<< Back'}</span>
+
+                        {(selectedToken && selectedToken.id && !selectPayForLevelUp) &&
+                        <Row>
+                            <h6 className="mtpx-60 text-center fc-white">UPGRADE YOUR LEVEL</h6>
+                            <span onClick={() => setSelectedToken(null)} style={{ color: "white" }}>{'<< Back'}</span>
                             <Col>
                                 <div className="d-flex align-items-center justify-content-around">
-                                     <Badge bg="secondary">{availableFreeLevel == 4 ? "LIEUTENANT GRADE AVAILABLE" : availableFreeLevel == 3 ? "2ND OFFICER GRADE AVAILABLE" : availableFreeLevel == 2 ? "1ST OFFICER GRADE AVAILABLE" : "NO FREE UPGRADE AVAILABE"}</Badge>
-                                    <a className="button --white-button" onClick={levelUp} disabled={isLoading || !availableFreeLevel} >
-                                        <img src="/images/white-button.svg" alt="" />
-                                        <span className="text d-flex align-items-center justify-content-center">
-                                            <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'UPGRADE'}</span>
+                                    <a className="button" onClick={levelUp} disabled={isLoading} >
+                                         <svg xmlns="http://www.w3.org/2000/svg" width="210" height="48" viewBox="0 0 291 70">
+                                          <g id="Path_22691" data-name="" fill="rgba(77,255,255,0.48)">
+                                            <path d="M 290.5 59.5 L 15.16070938110352 59.5 L 0.5 44.79335021972656 L 0.5 0.5 L 275.7822265625 0.5 L 290.5 16.32163619995117 L 290.5 59.5 Z" stroke="none"></path>
+                                            <path d="M 1 1 L 1 44.58668518066406 L 15.36825561523438 59 L 290 59 L 290 16.51826095581055 L 275.564453125 1 L 1 1 M 0 0 L 276 0 L 291 16.12503814697266 L 291 60 L 14.953125 60 L 0 45 L 0 0 Z" stroke="none" fill="#4dffff"></path>
+                                          </g>
+                                      </svg>
+                                        <span className="d-flex align-items-center justify-content-center">
+                                            <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'FREE UPGRADE'}</span>
                                         </span>
                                     </a>
                                 </div>
@@ -155,10 +171,15 @@ export default function Nfts() {
 
                             <Col>
                                 <div className="d-flex align-items-center justify-content-around">
-                                    <a className="button --white-button" disabled={isLoading} onClick={() => setPayForLevelUp(true)}>
-                                        <img src="/images/white-button.svg" alt="" />
-                                        <span className="text d-flex align-items-center justify-content-center">
-                                            <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'Pay For UPGRADE'}</span>
+                                    <a className="button" disabled={isLoading} onClick={() => setPayForLevelUp(true)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
+                                          <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
+                                            <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
+                                            <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
+                                          </g>
+                                        </svg>
+                                        <span className="d-flex align-items-center justify-content-center">
+                                            <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'BUY UPGRADE'}</span>
                                         </span>
                                     </a>
                                 </div>
@@ -167,40 +188,63 @@ export default function Nfts() {
                     </Container>
 
                     <Container className="mt-50">
-                        {selectPayForLevelUp && <Row>
-                            <span onClick={() => setPayForLevelUp(false)} style={{ color: "white" }}>{'<< Back'}</span>
-                            <Col>
-                                <Button variant="secondary" size="lg" onClick={increaseLevel}>
-                                    +
-                                </Button>
-                                <Badge bg="secondary">{formData.level}</Badge>
-                                <Button variant="secondary" size="lg" disabled={formData.level === 1} onClick={decreaseLevel}>
-                                    -
-                                </Button>
-                            </Col>
-                            <Col>
-                                <div className="d-flex align-items-center justify-content-around">
-                                    <a className="button --white-button">
-                                        <img src="/images/white-button.svg" alt="" />
-                                        <span className="text d-flex align-items-center justify-content-center">
-                                            <span className="">{(formData.level * levelUpprice).toFixed(4)} ETH</span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </Col>
+                        {selectPayForLevelUp &&
+                        <Modal show={setPayForLevelUp} onHide={() => setPayForLevelUp(false)} animation={false} backdrop="static">
+                            <Modal.Header closeButton>
+              
+                            </Modal.Header>
+                            
+                            <Modal.Body>
+                                <Row>
+                                    <Col>
+                                      <h5 className="fc-white tt-uppercase ls-large text-center mbpx-20">BUY UPGRADE</h5>
+                                    </Col>
+                                </Row>
 
-                            <Col>
-                                <div className="d-flex align-items-center justify-content-around">
-                                    <a className="button --white-button" disabled={isLoading} onClick={payForLevelUp}>
-                                        <img src="/images/white-button.svg" alt="" />
-                                        <span className="text d-flex align-items-center justify-content-center">
-                                            <span className="text" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'Submit'}</span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </Col>
+                                <div className="align-items-center flex-col">
+                                    <p className="text-center fc-white mbpx-6">Times to Mint</p>
+                                    <div className="modal-counter">
 
-                        </Row>}
+                                        <Button variant="secondary" size="lg" disabled={formData.level === 1} onClick={decreaseLevel}>
+                                        -
+                                        </Button>
+
+                                        <Badge bg="">{formData.level}</Badge>
+                                      
+                                        <Button variant="secondary" size="lg" onClick={increaseLevel}>
+                                            +
+                                        </Button>
+                                    </div>
+                                      
+
+                                    <div className="d-flex align-items-center justify-content-around">
+                                        <div className="mb-3">
+                                            <p className="text-center fc-white fs-large">Times to Mint</p>
+                                            <span className="d-flex align-items-center justify-content-center">
+                                                <span className="fc-primary counter-text">{(formData.level * levelUpprice).toFixed(4)} ETH</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <Row>
+                                    <div className="d-flex align-items-center justify-content-around">
+                                        <a className="button" disabled={isLoading} onClick={payForLevelUp}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
+                                                <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
+                                                <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
+                                                <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
+                                                </g>
+                                            </svg>
+                                            <span className="d-flex align-items-center justify-content-center">
+                                                <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'Submit'}</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </Row>
+                            </Modal.Body>
+                        </Modal>
+                        }
                     </Container>
 
                 </section>

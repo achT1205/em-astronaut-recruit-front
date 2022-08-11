@@ -273,3 +273,69 @@ img {
   margin-left: 10px;
   border-radius: 50%;
 }
+
+.modal-content {
+    border-radius: 0 !important;
+    background: rgba(0,0,0, 0.9) !important;
+    border: 1px solid white !important;
+}
+
+.modal-header {
+  border: none !important;
+  border-radius: 0 !important;
+  flex-direction: column;
+}
+
+.modal-header .btn-close {
+      background-color: white !important;
+    opacity: 1 !important;
+    color: black !important;
+}
+
+.modal-body .button .text {
+  font-size: 14px;
+}
+
+.modal-counter {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.counter-text {
+  font-weight: bold;
+  font-size: 22px;
+  letter-spacing: 2px;
+}
+
+.modal-counter button, .modal-counter button:hover {
+  background-color: #4DFFFF;
+  color: black;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1;
+    border: none;
+    width: 50px;
+    height: 50px;
+}
+
+.btn-check:active+.btn:focus, .btn-check:checked+.btn:focus, .btn.active:focus, .btn.show:focus, .btn:active:focus {
+  box-shadow: none !important;
+}
+
+.btn-check:focus+.btn, .btn:focus {
+  background-color: #4DFFFF !important;
+}
+
+.modal-counter .btn.disabled, .modal-counter .btn:disabled {
+  background-color: #027B7B !important;
+  opacity: 1;
+}
+
+.modal-counter .badge {
+  background-color: transparent;
+      font-size: 20px;
+    width: 60px;
+    text-align: center;
+}
