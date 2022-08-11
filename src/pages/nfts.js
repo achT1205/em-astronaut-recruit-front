@@ -28,14 +28,18 @@ export default function Nfts() {
         maxLevel,
         levelUpprice,
         selectedToken,
-        setSelectedToken,
+        handleTokenSelection,
         levelUp,
         payForLevelUp,
         isLoading,
-        setFormData
+        setFormData,
+        availableFreeLevel
     } = useContext(RecruitContext);
 
     const [selectPayForLevelUp, setPayForLevelUp] = useState(null);
+
+    const [upgradeOption, setUpgradeOption] = useState(null);
+
 
     const increaseLevel = () => {
         if (formData.level + selectedToken.level >= maxLevel)
@@ -54,6 +58,7 @@ export default function Nfts() {
         data.level--;
         setFormData(data)
     }
+
 
 
     return (
@@ -122,20 +127,20 @@ export default function Nfts() {
                                             <Card.Img src={recruit.url} alt="Card image" />
                                             <Card.Body>
                                                 <Card.Title className="fc-primary fw-bold"> ID : {recruit.id}</Card.Title>
-                                                <Card.Text className="fc-white"> LELEV : {recruit.level} </Card.Text>
+                                                <Card.Text className="fc-white"> LEVEL : {recruit.level} </Card.Text>
                                             </Card.Body>
                                         </Card>
 
-                                        <a className="button d-inline-flex" onClick={() => setSelectedToken(recruit)}>
+                                        <a className="button d-inline-flex" onClick={() => handleTokenSelection(recruit)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
-                                              <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
-                                                <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
-                                                <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
-                                              </g>
+                                                <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
+                                                    <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
+                                                    <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
+                                                </g>
                                             </svg>
-                                             <span className="d-flex align-items-center justify-content-center">
+                                            <span className="d-flex align-items-center justify-content-center">
                                                 <span className="text fc-white" style={{ cursor: "pointer" }}>UPGRADE</span>
-                                              </span>
+                                            </span>
                                         </a>
                                     </Col>
 
@@ -149,47 +154,132 @@ export default function Nfts() {
 
                     <Container className="mt-50">
 
-                        {(selectedToken && selectedToken.id && !selectPayForLevelUp) &&
-                        <Row>
-                            <h6 className="mtpx-60 text-center fc-white">UPGRADE YOUR LEVEL</h6>
-                            <span onClick={() => setSelectedToken(null)} style={{ color: "white" }}>{'<< Back'}</span>
-                            <Col>
-                                <div className="d-flex align-items-center justify-content-around">
-                                    <a className="button" onClick={levelUp} disabled={isLoading} >
-                                         <svg xmlns="http://www.w3.org/2000/svg" width="210" height="48" viewBox="0 0 291 70">
-                                          <g id="Path_22691" data-name="" fill="rgba(77,255,255,0.48)">
-                                            <path d="M 290.5 59.5 L 15.16070938110352 59.5 L 0.5 44.79335021972656 L 0.5 0.5 L 275.7822265625 0.5 L 290.5 16.32163619995117 L 290.5 59.5 Z" stroke="none"></path>
-                                            <path d="M 1 1 L 1 44.58668518066406 L 15.36825561523438 59 L 290 59 L 290 16.51826095581055 L 275.564453125 1 L 1 1 M 0 0 L 276 0 L 291 16.12503814697266 L 291 60 L 14.953125 60 L 0 45 L 0 0 Z" stroke="none" fill="#4dffff"></path>
-                                          </g>
-                                      </svg>
-                                        <span className="d-flex align-items-center justify-content-center">
-                                            <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'FREE UPGRADE'}</span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </Col>
+                        <Modal show={selectedToken && selectedToken.id} onHide={() => handleTokenSelection(null)} animation={false} backdrop="static">
+                            <Modal.Header closeButton>
 
-                            <Col>
-                                <div className="d-flex align-items-center justify-content-around">
-                                    <a className="button" disabled={isLoading} onClick={() => setPayForLevelUp(true)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
-                                          <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
-                                            <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
-                                            <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
-                                          </g>
-                                        </svg>
-                                        <span className="d-flex align-items-center justify-content-center">
-                                            <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'BUY UPGRADE'}</span>
-                                        </span>
-                                    </a>
-                                </div>
-                            </Col>
-                        </Row>}
-                    </Container>
+                            </Modal.Header>
+                            {(selectedToken && selectedToken.id) &&
+                                <Row>
+                                    <h6 className="mtpx-60 text-center fc-white">UPGRADE YOUR LEVEL</h6>
+                                    {/* <span onClick={() => handleTokenSelection(null)} style={{ color: "white" }}>{'<< Back'}</span> */}
+                                    <Col>
+                                        <div className="d-flex align-items-center justify-content-around">
+                                            <a className="button" onClick={() => setUpgradeOption(1)} >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="210" height="48" viewBox="0 0 291 70">
+                                                    <g id="Path_22691" data-name="" fill="rgba(77,255,255,0.48)">
+                                                        <path d="M 290.5 59.5 L 15.16070938110352 59.5 L 0.5 44.79335021972656 L 0.5 0.5 L 275.7822265625 0.5 L 290.5 16.32163619995117 L 290.5 59.5 Z" stroke="none"></path>
+                                                        <path d="M 1 1 L 1 44.58668518066406 L 15.36825561523438 59 L 290 59 L 290 16.51826095581055 L 275.564453125 1 L 1 1 M 0 0 L 276 0 L 291 16.12503814697266 L 291 60 L 14.953125 60 L 0 45 L 0 0 Z" stroke="none" fill="#4dffff"></path>
+                                                    </g>
+                                                </svg>
+                                                <span className="d-flex align-items-center justify-content-center">
+                                                    <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'FREE UPGRADE'}</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </Col>
 
-                    <Container className="mt-50">
-                        {selectPayForLevelUp &&
-                        <Modal show={setPayForLevelUp} onHide={() => setPayForLevelUp(false)} animation={false} backdrop="static">
+                                    <Col>
+                                        <div className="d-flex align-items-center justify-content-around">
+                                            <a className="button" onClick={() => setUpgradeOption(2)}>
+                                                {/* disabled={isLoading} onClick={() => setPayForLevelUp(true)} */}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
+                                                    <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
+                                                        <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
+                                                        <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
+                                                    </g>
+                                                </svg>
+                                                <span className="d-flex align-items-center justify-content-center">
+                                                    <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'BUY UPGRADE'}</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </Col>
+                                </Row>}
+                            {upgradeOption === 1 && <Row >
+                                <Row>
+
+                                    <Row>
+                                        <Col>
+                                            <h5 className="fc-white tt-uppercase ls-large text-center mbpx-20">{availableFreeLevel == 4 ? "LIEUTENANT LEVEL AVAILABLE" : availableFreeLevel == 3 ? "2ND OFFICER LEVEL AVAILABLE" : availableFreeLevel == 2 ? "1ST OFFICER LEVEL AVAILABLE" : "NO FREE UPGRADE AVAILABE"}</h5>
+                                        </Col>
+                                    </Row>
+
+
+
+                                    <Row>
+                                        <div className="d-flex align-items-center justify-content-around">
+                                            <a className="button" onClick={levelUp} disabled={isLoading} >
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
+                                                    <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
+                                                        <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
+                                                        <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
+                                                    </g>
+                                                </svg>
+                                                <span className="d-flex align-items-center justify-content-center">
+                                                    <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'Submit'}</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </Row>
+                                </Row>
+                            </Row>}
+                            {upgradeOption === 2 && <Row>
+                                <Row>
+                                    <Col>
+                                        <h5 className="fc-white tt-uppercase ls-large text-center mbpx-20">BUY UPGRADE</h5>
+                                    </Col>
+                                </Row>
+
+                                <div className="align-items-center flex-col">
+                                    <p className="text-center fc-white mbpx-6">Times to Mint</p>
+                                    <div className="modal-counter">
+
+                                        <Button variant="secondary" size="lg" disabled={formData.level === 1} onClick={decreaseLevel}>
+                                            -
+                                        </Button>
+
+                                        <Badge bg="">{formData.level}</Badge>
+
+                                        <Button variant="secondary" size="lg" onClick={increaseLevel}>
+                                            +
+                                        </Button>
+                                    </div>
+
+
+                                    <div className="d-flex align-items-center justify-content-around">
+                                        <div className="mb-3">
+                                            <p className="text-center fc-white fs-large">Times to Mint</p>
+                                            <span className="d-flex align-items-center justify-content-center">
+                                                <span className="fc-primary counter-text">{(formData.level * levelUpprice).toFixed(4)} ETH</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <Row>
+                                    <div className="d-flex align-items-center justify-content-around">
+                                        <a className="button" disabled={isLoading} onClick={payForLevelUp}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
+                                                <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
+                                                    <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
+                                                    <path d="M 15.435546875 1 L 1 16.51826095581055 L 1 59 L 275.6317443847656 59 L 290 44.58668518066406 L 290 1 L 15.435546875 1 M 15 0 L 291 0 L 291 45 L 276.046875 60 L 0 60 L 0 16.12503814697266 L 15 0 Z" stroke="none" fill="#eea500"></path>
+                                                </g>
+                                            </svg>
+                                            <span className="d-flex align-items-center justify-content-center">
+                                                <span className="text fc-white" style={{ cursor: "pointer" }}>{isLoading ? 'In progress ...' : 'Submit'}</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </Row>
+
+                            </Row>}
+                            <Modal.Body>
+                            </Modal.Body>
+                        </Modal>
+
+
+                        {/* {selectPayForLevelUp &&
+                        <Modal show={selectedToken && selectedToken.id} onHide={() => setPayForLevelUp(false)} animation={false} backdrop="static">
                             <Modal.Header closeButton>
               
                             </Modal.Header>
@@ -244,7 +334,7 @@ export default function Nfts() {
                                 </Row>
                             </Modal.Body>
                         </Modal>
-                        }
+                        } */}
                     </Container>
 
                 </section>
