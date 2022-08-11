@@ -27,7 +27,7 @@ export default function Nfts() {
         maxLevel,
         levelUpprice,
         selectedToken,
-        setSelectedToken,
+        handleTokenSelection,
         levelUp,
         payForLevelUp,
         isLoading,
@@ -114,7 +114,7 @@ export default function Nfts() {
                                 recruits &&
                                 recruits.map((recruit) => (
 
-                                    <Col key={recruit.id} onClick={() => setSelectedToken(recruit)}>
+                                    <Col key={recruit.id} onClick={() => handleTokenSelection(recruit)}>
                                         <Card style={{ width: '18rem' }}
                                             bg={selectedToken && selectedToken.id == recruit.id ? 'light' : 'dark'}
                                             text={selectedToken && selectedToken.id == recruit.id ? 'dark' : 'white'}
@@ -123,6 +123,7 @@ export default function Nfts() {
                                             <Card.Img src={recruit.url} alt="Card image" />
                                             <Card.ImgOverlay>
                                                 <Card.Title> ID : {recruit.id}</Card.Title>
+                                                <Card.Title> Title : {recruit.title}</Card.Title>
                                                 <Card.Text> LELEV : {recruit.level}
                                                 </Card.Text>
                                             </Card.ImgOverlay>
@@ -138,7 +139,7 @@ export default function Nfts() {
 
                     <Container className="mt-50">
                         {(selectedToken && selectedToken.id && !selectPayForLevelUp) && <Row>
-                            <span onClick={() => setSelectedToken(null)} style={{ color: "white" }}>{'<< Back'}</span>
+                            <span onClick={() => handleTokenSelection(null)} style={{ color: "white" }}>{'<< Back'}</span>
                             <Col>
                                 <div className="d-flex align-items-center justify-content-around">
                                     <a className="button --white-button" onClick={levelUp} disabled={isLoading} >

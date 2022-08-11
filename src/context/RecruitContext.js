@@ -84,6 +84,19 @@ export const RecruitProvider = ({ children }) => {
   const [isOperator, setIsOperator] = useState(null);
 
 
+  const handleTokenSelection = (item) => {
+    if(item && item.level === maxLevel){
+      const dialog = {
+        title: "MAX LEVEL REACHED",
+        message: 'This recruit is already a LIEUTENANT',
+        type: 'danger'
+      }
+      setDialog(dialog)
+      return
+    }
+    setSelectedToken(item)
+  }
+
   const logOut = (redirect = false, to = '/registration') => {
     if (redirect)
       signOut({ redirect: redirect, callbackUrl: to })
@@ -899,7 +912,7 @@ export const RecruitProvider = ({ children }) => {
         messageHashBinary,
         signature,
         timestamp,
-        selectedToken.id, 
+        selectedToken.id,
         level);
       setIsLoading(true);
       console.log(`Loading - ${transaction.hash}`);
@@ -1054,12 +1067,15 @@ export const RecruitProvider = ({ children }) => {
                 const metadata = await axios.get(jsonUrl)
                 url = metadata.data.image.replace("ipfs://", "https://ipfs.io/ipfs/")
               }
+
               recruits.push({
                 id: token.toNumber(),
                 level: level,
                 wasFreeMinted: wasFreeMinted,
-                url: url
+                url: url,
+                title: level === 4 ? "LIEUTENANT" : level === 3 ? "2ND OFFICER" : level === 2 ? "1ST OFFICER" : "RECRUIT"
               })
+
               setRecruits(recruits)
             });
 
@@ -1139,7 +1155,7 @@ export const RecruitProvider = ({ children }) => {
         handleChange,
         levelUp,
         payForLevelUp,
-        setSelectedToken,
+        handleTokenSelection,
         addUserForFreeMint,
         addUserForVipMint,
         addUserForLevelUp,
