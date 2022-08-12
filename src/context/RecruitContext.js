@@ -49,7 +49,6 @@ let web3Modal;
 export const apiClient = axios.create(config);
 //export const twitterClient = axios.create(twitterConfig);
 //apiClient.defaults.headers.common['Authorization'] = process.env.NEXT_PUBLIC_API_KEY;
-
 const getRecruitContract = () => {
   const contact = new ethers.Contract(
     process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
