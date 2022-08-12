@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         });
 
         if (!Item)
-            return res.status(200).json({ message: "not listed yet." });
+            return res.status(200).json({ message: "not listed yet for upgade." });
         else if (!Item.canLevelUp || !Item.level || Item.level == 0)
             return res.status(200).json({ message: "can not upgade" });
 

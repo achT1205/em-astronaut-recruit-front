@@ -934,6 +934,18 @@ export const RecruitProvider = ({ children }) => {
       logOut()
       return;
     }
+    if (!availableFreeLevel || (typeof (canLevelUp) == "undefined")) {
+      const dialog = {
+        title: "Can no upgrade",
+        message: "No free upgrade available",
+        type: 'danger'
+      }
+      console.log(dialog)
+      setIsLoading(false);
+      setDialog(dialog)
+      return;
+    }
+
 
     const levelUpSignature = await apiClient.get(`players/${currentAccount}/levelup-signature`);
     let hashedMessage, signature, timestamp, level;

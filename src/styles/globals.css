@@ -59,12 +59,11 @@ img {
   justify-content: space-around;
 }
 
-.primary-header > * {
+.primary-header>* {
   flex: 1 1 0px;
 }
 
-.primary-navigation {
-}
+.primary-navigation {}
 
 .header-logo {
   display: block;
@@ -79,8 +78,7 @@ img {
   float: right;
 }
 
-.main-body {
-}
+.main-body {}
 
 .main-body .title {
   color: white;
@@ -143,17 +141,21 @@ img {
   .show-desktop {
     display: none;
   }
+
   .show-mobile {
     display: block;
   }
+
   .main-body .title {
     font-size: 24px;
     letter-spacing: 2px;
   }
+
   .main-body .desc {
     font-size: 14px;
     letter-spacing: 0;
   }
+
   .mint-button {
     text-align: center;
     position: relative;
@@ -163,10 +165,12 @@ img {
     max-width: 200px;
     margin: -80px auto 0;
   }
+
   .mint-button .desc {
     text-align: center;
     text-transform: uppercase;
   }
+
   .social-media-section {
     display: flex;
     flex-direction: row;
@@ -177,6 +181,7 @@ img {
     margin: 30px 0px 0px;
     justify-content: center;
   }
+
   .social-media-section a {
     margin: 0 6px;
   }
@@ -237,11 +242,11 @@ img {
   pointer-events: none;
 }
 
-.checkbox input[type="checkbox"]:checked + .label {
+.checkbox input[type="checkbox"]:checked+.label {
   border-color: #ffffff;
 }
 
-.checkbox input[type="checkbox"]:checked + .label:after {
+.checkbox input[type="checkbox"]:checked+.label:after {
   -webkit-transform: scale(1);
   -moz-transform: scale(1);
   -o-transform: scale(1);
@@ -259,10 +264,11 @@ img {
   font-weight: 700;
 }
 
-.mt-20{
+.mt-20 {
   margin-top: 20px;
 }
-.mt-50{
+
+.mt-50 {
   margin-top: 50px;
 }
 
@@ -275,9 +281,9 @@ img {
 }
 
 .modal-content {
-    border-radius: 0 !important;
-    background: rgba(0,0,0, 0.9) !important;
-    border: 1px solid white !important;
+  border-radius: 0 !important;
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: 1px solid white !important;
 }
 
 .modal-header {
@@ -287,9 +293,9 @@ img {
 }
 
 .modal-header .btn-close {
-      background-color: white !important;
-    opacity: 1 !important;
-    color: black !important;
+  background-color: white !important;
+  opacity: 1 !important;
+  color: black !important;
 }
 
 .modal-body .button .text {
@@ -297,10 +303,10 @@ img {
 }
 
 .modal-counter {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
 }
 
 .counter-text {
@@ -309,33 +315,52 @@ img {
   letter-spacing: 2px;
 }
 
-.modal-counter button, .modal-counter button:hover {
+.modal-counter button,
+.modal-counter button:hover {
   background-color: #4DFFFF;
   color: black;
-    font-size: 32px;
-    font-weight: bold;
-    line-height: 1;
-    border: none;
-    width: 50px;
-    height: 50px;
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1;
+  border: none;
+  width: 50px;
+  height: 50px;
 }
 
-.btn-check:active+.btn:focus, .btn-check:checked+.btn:focus, .btn.active:focus, .btn.show:focus, .btn:active:focus {
+.btn-check:active+.btn:focus,
+.btn-check:checked+.btn:focus,
+.btn.active:focus,
+.btn.show:focus,
+.btn:active:focus {
   box-shadow: none !important;
 }
 
-.btn-check:focus+.btn, .btn:focus {
+.btn-check:focus+.btn,
+.btn:focus {
   background-color: #4DFFFF !important;
 }
 
-.modal-counter .btn.disabled, .modal-counter .btn:disabled {
+.modal-counter .btn.disabled,
+.modal-counter .btn:disabled {
   background-color: #027B7B !important;
   opacity: 1;
 }
 
 .modal-counter .badge {
   background-color: transparent;
-      font-size: 20px;
-    width: 60px;
-    text-align: center;
+  font-size: 20px;
+  width: 60px;
+  text-align: center;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+
+.margin-bottom-40 {
+  margin-bottom: 40px;
 }

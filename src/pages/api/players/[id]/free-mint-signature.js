@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         });
 
         if (!Item) {
-            return res.status(200).json({ message: "not listed yet for free mint sale." });
+            return res.status(200).json({ message: "Not listed yet for free mint." });
         } else {
             if (Item.goldenVip !== true) {
                 if (!Item.hasFinishedGame) {

@@ -13,7 +13,7 @@ export default async function handler(req, res) {
         });
 
         if (!Item)
-            return res.status(200).json({ message: "not listed yet." });
+            return res.status(200).json({ message: "not listed yet for the first 24h sale." });
         else
             if (!Item.isVip)
                 return res.status(200).json({ message: "not listed yet for VIP sale." });
