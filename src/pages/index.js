@@ -267,9 +267,9 @@ export default function Home() {
               <div className="col-md-6">
                 <h2 className="maintitle">THE COLLECTION</h2>
                 <p className="maindesc">
-                  It's time! Hone your skills and prepare yourselves for the future. The Recruit Collection is a Free Mint for ALL, and your entry pass into the Astro Must ecosystem. <br /><br />
+                  It&apos;s time! Hone your skills and prepare yourselves for the future. The Recruit Collection is a Free Mint for ALL, and your entry pass into the Astro Must ecosystem. <br /><br />
                   <strong>1 free mint + gas per wallet. </strong> <br />
-                  Once you mint your Recruit, you 'MUST' join us on discord to rank up your Recruit to Lieutenant! <br /><br />
+                  Once you mint your Recruit, you &apos;MUST&apos; join us on discord to rank up your Recruit to Lieutenant! <br /><br />
                   We are waiting for you….
                 </p>
 
