@@ -5,7 +5,7 @@ export default async function handler(req, res) {
     switch (method) {
         case 'POST':
             try {
-                const { walletId, discordHandler, discordId, twitterHandler, twitterId, twitterProfilePicture, discordProfilePicture,  hasFinishedGame } = req.body
+                const { walletId, discordHandler, discordId, twitterHandler, twitterId, twitterProfilePicture, discordProfilePicture, hasFinishedGame, goldenVip } = req.body
 
                 const { Item } = await db.get({
                     Key: {
@@ -25,6 +25,7 @@ export default async function handler(req, res) {
                             "twitterProfilePicture": twitterProfilePicture,
                             "discordProfilePicture": discordProfilePicture,
                             "hasFinishedGame": hasFinishedGame,
+                            "goldenVip":goldenVip,
                             "createdAt": Date.now(),
                             "updatedAt": null
                         },
@@ -73,6 +74,13 @@ export default async function handler(req, res) {
                         updateExpression = updateExpression + ", #hasFinishedGame = :hasFinishedGame"
                         expressionAttributeNames["#hasFinishedGame"] = "hasFinishedGame"
                     }
+
+                    if (typeof (goldenVip) != "undefined") {
+                        expressionAttributeValues[":goldenVip"] = goldenVip
+                        updateExpression = updateExpression + ", #goldenVip = :goldenVip"
+                        expressionAttributeNames["#goldenVip"] = "goldenVip"
+                    }
+
                     if (typeof (isVip) != "undefined") {
                         expressionAttributeValues[":isVip"] = isVip
                         updateExpression = updateExpression + ", #isVip = :isVip"

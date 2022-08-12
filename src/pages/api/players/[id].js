@@ -19,7 +19,7 @@ export default async function handler(req, res) {
             break;
         case 'PUT':
             try {
-                const { walletId, discordHandler, discordId, twitterHandler, twitterId, twitterProfilePicture, discordProfilePicture, hasFinishedGame, isVip, canLevelUp, level } = req.body
+                const { walletId, discordHandler, discordId, twitterHandler, twitterId, twitterProfilePicture, discordProfilePicture, hasFinishedGame, goldenVip, isVip, canLevelUp, level } = req.body
                 let updateExpression = "SET  #updatedAt = :updatedAt";
                 let expressionAttributeNames = { "#updatedAt": "updatedAt" }
                 let expressionAttributeValues = { ":updatedAt": Date.now() }
@@ -57,6 +57,11 @@ export default async function handler(req, res) {
                     expressionAttributeValues[":hasFinishedGame"] = hasFinishedGame
                     updateExpression = updateExpression + ", #hasFinishedGame = :hasFinishedGame"
                     expressionAttributeNames["#hasFinishedGame"] = "hasFinishedGame"
+                }
+                if (typeof (goldenVip) != "undefined") {
+                    expressionAttributeValues[":goldenVip"] = goldenVip
+                    updateExpression = updateExpression + ", #goldenVip = :goldenVip"
+                    expressionAttributeNames["#goldenVip"] = "goldenVip"
                 }
                 if (typeof (isVip) != "undefined") {
                     expressionAttributeValues[":isVip"] = isVip

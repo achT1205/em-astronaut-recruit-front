@@ -73,7 +73,7 @@ export const RecruitProvider = ({ children }) => {
   const [unitPrice, setUnitPrice] = useState(null);
   const [unitFormatedPrice, setUnitFormatedPrice] = useState(null);
   const [hasFreeMinted, setHasFreeMinted] = useState(null);
-  const [formData, setFormData] = useState({ amount: 1, level: 1, freeMintWallet: null, hasFinishedGame: false, vipMintWallet: null, isVip: false });
+  const [formData, setFormData] = useState({ amount: 1, level: 1, freeMintWallet: null, hasFinishedGame: false, goldenVip: false, vipMintWallet: null, isVip: false });
   const [recruits, setRecruits] = useState(null);
   const [maxLevel, setMaxLevel] = useState(null);
   const [levelUpprice, setLevelUpprice] = useState(null);
@@ -261,6 +261,59 @@ export const RecruitProvider = ({ children }) => {
       setIsLoading(false)
     }
   }
+
+
+  const addGoldenVip = async () => {
+    setDialog(null)
+    setIsLoading(true)
+    const { goldenVipWallet, goldenVip } = formData;
+
+    if (!isOperator) {
+      const dialog = {
+        title: "Forbidden",
+        message: 'Only operator can do this action',
+        type: 'danger'
+      }
+      setDialog(dialog)
+      setIsLoading(false)
+      return
+    }
+
+    if (!goldenVipWallet) {
+      const dialog = {
+        title: "Parrameter error",
+        message: 'Please enter a correct wallet address',
+        type: 'danger'
+      }
+      setDialog(dialog)
+      setIsLoading(false)
+      return
+    }
+
+
+
+    try {
+      await apiClient.put(`/players/${goldenVipWallet}`, { walletId: goldenVipWallet, goldenVip: goldenVip })
+      const dialog = {
+        title: "Golden VIP",
+        message: goldenVip ? `User ${goldenVipWallet} is now Golden VIP` : `User ${goldenVipWallet} is now removed from the Golden VIP list`,
+        type: 'success'
+      }
+      setDialog(dialog)
+      setIsLoading(false)
+    } catch (error) {
+      const dialog = {
+        title: "Error",
+        message: error.message,
+        type: 'danger'
+      }
+      setDialog(dialog)
+      setIsLoading(false)
+    }
+  }
+
+
+
 
   const addUserForVipMint = async () => {
     setDialog(null)
@@ -1165,6 +1218,7 @@ export const RecruitProvider = ({ children }) => {
         payForLevelUp,
         handleTokenSelection,
         addUserForFreeMint,
+        addGoldenVip,
         addUserForVipMint,
         addUserForLevelUp,
         addOperator,

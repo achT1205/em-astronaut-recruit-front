@@ -17,6 +17,7 @@ export default function Admin() {
         dialog,
         cleanUp,
         addUserForFreeMint,
+        addGoldenVip,
         addUserForVipMint,
         addUserForLevelUp,
         addOperator,
@@ -96,6 +97,33 @@ export default function Admin() {
 
                                 <div className="d-flex align-items-center justify-content-around">
                                     <a className="button --white-button" style={{ cursor: "pointer" }} onClick={addUserForFreeMint} disabled={isLoading} >
+                                        <img src="/images/white-button.svg" alt="" />
+                                        <span className="text d-flex align-items-center justify-content-center">
+                                            <span className="text">{isLoading ? 'Loading...' : 'Submit'}</span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </Form>
+                        </Row>
+                    </Container>
+                </section>
+
+                <section className="hero-banner mt-50">
+                    <Container >
+                        <h5>Add a golden vip (by pass the game & registration)</h5>
+
+                        <Row>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="goldenVip">
+                                    <Form.Label>wallet address</Form.Label>
+                                    <Form.Control type="text" placeholder="Enter a wallet address" onChange={(e) => handleChange(e, 'goldenVipWallet')} />
+                                </Form.Group>
+                                <Form.Group className="mb-3" controlId="goldenVip" >
+                                    <Form.Check type="checkbox" label="Golden Vip" onChange={(e) => handleChange(e, 'goldenVip', 'checkbox')} />
+                                </Form.Group>
+
+                                <div className="d-flex align-items-center justify-content-around">
+                                    <a className="button --white-button" style={{ cursor: "pointer" }} onClick={addGoldenVip} disabled={isLoading} >
                                         <img src="/images/white-button.svg" alt="" />
                                         <span className="text d-flex align-items-center justify-content-center">
                                             <span className="text">{isLoading ? 'Loading...' : 'Submit'}</span>

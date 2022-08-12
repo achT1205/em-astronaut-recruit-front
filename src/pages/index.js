@@ -67,9 +67,9 @@ export default function Home() {
 
   const popover = (
     <Popover id="popover-basic">
-      <Popover.Header as="h3">Go list</Popover.Header>
+      <Popover.Header as="h3">Go to NFTs</Popover.Header>
       <Popover.Body>
-        Click here to to your list of NFTs
+        Click here to see your NFTs
       </Popover.Body>
     </Popover>
   );
@@ -114,24 +114,24 @@ export default function Home() {
                   <img src="/images/white-button.svg" alt="" />
                   <span className="text">Connect wallet</span>
                 </a> :
-                  <a className="start-button button --white-button" style={{ cursor: "pointer" }}>
-                    <>
-                      <img src="/images/white-button.svg" alt="" />
-                      <span className="text">{shortAddress}</span>
-                    </>
-                  </a>
+                  // <a className="start-button button --white-button" style={{ cursor: "pointer" }}>
+                  //   <>
+                  //     <img src="/images/white-button.svg" alt="" />
+                  //     <span className="text">{shortAddress}</span>
+                  //   </>
+                  // </a>
 
-                  // <OverlayTrigger
-                  //   placement="right"
-                  //   overlay={popover}
-                  // >
-                  //   <a onClick={() => push('/nfts')} className="start-button button --white-button" style={{ cursor: "pointer" }}>
-                  //     <>
-                  //       <img src="/images/white-button.svg" alt="" />
-                  //       <span className="text">{shortAddress}</span>
-                  //     </>
-                  //   </a>
-                  // </OverlayTrigger>
+                  <OverlayTrigger
+                    placement="left"
+                    overlay={popover}
+                  >
+                    <a onClick={() => push('/nfts')} className="start-button button --white-button" style={{ cursor: "pointer" }}>
+                      <>
+                        <img src="/images/white-button.svg" alt="" />
+                        <span className="text">{shortAddress}</span>
+                      </>
+                    </a>
+                  </OverlayTrigger>
                 }
               </div>
             </div>
