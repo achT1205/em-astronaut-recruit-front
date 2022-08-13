@@ -955,10 +955,10 @@ export const RecruitProvider = ({ children }) => {
       return;
     }
 
-    if (selectedToken.level >= availableFreeLevel) {
+    if (selectedToken.level !== (availableFreeLevel - 1)) {
       const dialog = {
         title: "Can no upgrade",
-        message: "Can not apply this role to the selected recruit",
+        message: "Can only upgrate to one level at the time",
         type: 'danger'
       }
       console.log(dialog)
