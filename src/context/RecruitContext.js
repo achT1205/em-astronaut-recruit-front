@@ -951,6 +951,22 @@ export const RecruitProvider = ({ children }) => {
       return;
     }
 
+    if (selectedToken.level == maxLevel) {
+      return;
+    }
+
+    if (selectedToken.level >= availableFreeLevel) {
+      const dialog = {
+        title: "Can no upgrade",
+        message: "Can not apply this role to the selected recruit",
+        type: 'danger'
+      }
+      console.log(dialog)
+      setIsLoading(false);
+      setDialog(dialog)
+      return;
+    }
+
 
     const levelUpSignature = await apiClient.get(`players/${currentAccount}/levelup-signature`);
     let hashedMessage, signature, timestamp, level;
@@ -976,28 +992,30 @@ export const RecruitProvider = ({ children }) => {
       level = levelUpSignature.data.level;
     }
 
-    try {
-      const recruitContract = getRecruitContract();
-      const messageHashBinary = Buffer.from(hashedMessage, 'base64')
 
-      const currentLevel = parseInt(level) - 1;
+
+    try {
+
       await apiClient.put(`/players/${currentAccount}`, {
         walletId: currentAccount,
-        canLevelUp: currentLevel > 0 ? true : false,
-        level: currentLevel
+        canLevelUp: false,
+        level: 0
       })
 
+
+      const recruitContract = getRecruitContract();
+      const messageHashBinary = Buffer.from(hashedMessage, 'base64')
       const transaction = await recruitContract.levelUp(
         messageHashBinary,
         signature,
         timestamp,
         selectedToken.id,
-        1);
+        level);
       setIsLoading(true);
       console.log(`Loading - ${transaction.hash}`);
       await transaction.wait();
       console.log(`Success - ${transaction.hash}`);
-     
+
       window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
       setIsLoading(false);
       const dialog = {
