@@ -732,6 +732,10 @@ export const RecruitProvider = ({ children }) => {
       !freemintSignature.data ||
       !freemintSignature.data.hashedMessage) {
       const error = freemintSignature.data.message
+      if (error === "did not complete profile yet.") {
+        window.location.href = `${process.env.NEXTAUTH_URL}registration`;
+        return
+      }
       console.log(error);
       const dialog = {
         title: "ERROR",
@@ -764,7 +768,7 @@ export const RecruitProvider = ({ children }) => {
       window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
       setDialog(dialog)
       setIsLoading(false);
-     
+
 
     } catch (error) {
       const dialog = {
