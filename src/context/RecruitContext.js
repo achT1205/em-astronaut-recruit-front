@@ -878,7 +878,7 @@ export const RecruitProvider = ({ children }) => {
       console.log(`Success - ${transaction.hash}`);
 
       setShowBuyOptions(false)
-      window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
+      window.location.href = `${process.env.NEXTAUTH_URL}`;
       const dialog = {
         title: "Success mint",
         message: 'Your recruit was minted successfully !',
@@ -979,6 +979,14 @@ export const RecruitProvider = ({ children }) => {
     try {
       const recruitContract = getRecruitContract();
       const messageHashBinary = Buffer.from(hashedMessage, 'base64')
+
+      const currentLevel = parseInt(level) - 1;
+      await apiClient.put(`/players/${currentAccount}`, {
+        walletId: currentAccount,
+        canLevelUp: currentLevel > 0 ? true : false,
+        level: currentLevel
+      })
+
       const transaction = await recruitContract.levelUp(
         messageHashBinary,
         signature,
@@ -989,12 +997,7 @@ export const RecruitProvider = ({ children }) => {
       console.log(`Loading - ${transaction.hash}`);
       await transaction.wait();
       console.log(`Success - ${transaction.hash}`);
-      const currentLevel = parseInt(level) - 1;
-      await apiClient.put(`/players/${currentAccount}`, {
-        walletId: currentAccount,
-        canLevelUp: currentLevel > 0 ? true : false,
-        level: currentLevel
-      })
+     
       window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
       setIsLoading(false);
       const dialog = {
