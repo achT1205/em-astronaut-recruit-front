@@ -11,6 +11,9 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Badge from 'react-bootstrap/Badge';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
+import { useRouter } from 'next/router'
 
 export default function Nfts() {
     const closeDilod = () => {
@@ -39,6 +42,17 @@ export default function Nfts() {
     const [selectPayForLevelUp, setPayForLevelUp] = useState(null);
 
     const [upgradeOption, setUpgradeOption] = useState(null);
+
+    const { push } = useRouter()
+
+    const popover = (
+        <Popover id="popover-basic">
+            <Popover.Header as="h3">Current wallet</Popover.Header>
+            <Popover.Body>
+                {shortAddress}
+            </Popover.Body>
+        </Popover>
+    );
 
 
     const increaseLevel = () => {
@@ -99,12 +113,17 @@ export default function Nfts() {
                                     <span className="text">Connect wallet</span>
                                 </a> :
 
-                                    <a
-                                        className="start-button button --white-button"
+                                    <OverlayTrigger
+                                        placement="left"
+                                        overlay={popover}
                                     >
-                                        <img src="/images/white-button.svg" alt="" />
-                                        <span className="text">{shortAddress}</span>
-                                    </a>
+                                        <a onClick={() => push('/')} className="start-button button --white-button" style={{ cursor: "pointer" }}>
+                                            <>
+                                                <img src="/images/white-button.svg" alt="" />
+                                                <span className="text">Home </span>
+                                            </>
+                                        </a>
+                                    </OverlayTrigger>
                                 }
                             </div>
                         </div>
