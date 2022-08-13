@@ -1182,15 +1182,15 @@ export const RecruitProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    connectWallet();
-    if (typeof window !== "undefined" && window.ethereum) {
-      window.ethereum.on("accountsChanged", () => {
-        logOut(true, '/')
-      });
-      window.ethereum.on("networkChanged", function () {
-        logOut(true, '/')
-      });
-    }
+    // connectWallet();
+    // if (typeof window !== "undefined" && window.ethereum) {
+    //   window.ethereum.on("accountsChanged", () => {
+    //     logOut(true, '/')
+    //   });
+    //   window.ethereum.on("networkChanged", function () {
+    //     logOut(true, '/')
+    //   });
+    // }
   }, []);
 
   return (
