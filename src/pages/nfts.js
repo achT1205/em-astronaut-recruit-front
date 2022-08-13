@@ -117,12 +117,8 @@ export default function Nfts() {
                             {
                                 recruits &&
                                 recruits.map((recruit) => (
-
                                     <Col className="mtpx-20" key={recruit.id}>
                                         <Card className="nft-card"
-                                            bg={selectedToken && selectedToken.id == recruit.id ? '' : ''}
-                                            text={selectedToken && selectedToken.id == recruit.id ? '' : ''}
-                                            border={selectedToken && selectedToken.id == recruit.id ? '' : ''}
                                         >
                                             <Card.Img src={recruit.url} alt="Card image" />
                                             <Card.Body>
@@ -132,7 +128,7 @@ export default function Nfts() {
                                             </Card.Body>
                                         </Card>
 
-                                        <a className="button d-inline-flex" onClick={() => handleTokenSelection(recruit)}>
+                                        {recruit.level < maxLevel && <a className="button d-inline-flex" onClick={() => handleTokenSelection(recruit)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
                                                 <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
                                                     <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>
@@ -142,12 +138,14 @@ export default function Nfts() {
                                             <span className="d-flex align-items-center justify-content-center">
                                                 <span className="text fc-white" style={{ cursor: "pointer" }}>UPGRADE</span>
                                             </span>
-                                        </a>
+                                        </a>}
                                     </Col>
 
                                 ))
                             }
-                            {(!recruits || recruits.length === 0) && <h6 style={{ color: "white" }} className="mtpx-60 text-center">YOU DO NO HAVE ANY RECRUIT YET</h6>}
+                            {isLoading ? <h6 style={{ color: "white" }} className="mtpx-60 text-center">Loading</h6> :
+                                (!recruits || recruits.length === 0) ? <h6 style={{ color: "white" }} className="mtpx-60 text-center">YOU DO NO HAVE ANY RECRUIT YET</h6> : ''}
+
 
                         </Row>
                     </Container>
@@ -198,11 +196,11 @@ export default function Nfts() {
                                 <Row>
 
                                     <Row>
-                                        <h6 className="mtpx-60 text-center fc-white margin-bottom-40">{availableFreeLevel == 4 ? "LIEUTENANT LEVEL AVAILABLE" : availableFreeLevel == 3 ? "2ND OFFICER LEVEL AVAILABLE" : availableFreeLevel == 2 ? "1ST OFFICER LEVEL AVAILABLE" : "NO FREE UPGRADE AVAILABE"}</h6>
+                                        <h6 className="mtpx-60 text-center fc-white margin-bottom-40">{availableFreeLevel == maxLevel ? "LIEUTENANT LEVEL AVAILABLE" : availableFreeLevel == (maxLevel - 1) ? "1ST OFFICER LEVEL AVAILABLE" : availableFreeLevel == (maxLevel - 2) ? "2ND OFFICER LEVEL AVAILABLE" : "NO FREE UPGRADE AVAILABE"}</h6>
                                     </Row>
                                     <Row>
                                         <div className="d-flex align-items-center justify-content-around">
-                                            <a className="button" onClick={levelUp} disabled={isLoading || !availableFreeLevel  || (typeof (canLevelUp) == "undefined")} >
+                                            <a className="button" onClick={levelUp} disabled={isLoading || !availableFreeLevel || (typeof (canLevelUp) == "undefined")} >
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="220" height="48" viewBox="0 0 291 70">
                                                     <g id="Path_22692" data-name="" fill="rgba(238,165,0,0.4)">
                                                         <path d="M 275.8393249511719 59.5 L 0.5 59.5 L 0.5 16.32163619995117 L 15.21776866912842 0.5 L 290.5 0.5 L 290.5 44.79335021972656 L 275.8393249511719 59.5 Z" stroke="none"></path>

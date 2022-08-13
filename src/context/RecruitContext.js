@@ -191,6 +191,7 @@ export const RecruitProvider = ({ children }) => {
         type: 'success'
       }
       setDialog(dialog)
+      window.location.href = process.env.NEXTAUTH_URL;
     } catch (error) {
       console.log(error);
       const dialog = {
@@ -623,7 +624,7 @@ export const RecruitProvider = ({ children }) => {
 
       setIsListed(false);
       setCurrentAccount(address);
-      const shortAddr = `${address.substring(0, 6)}...${address.substring(address.length - 6, address.length)}`
+      const shortAddr = `${address.substring(0, 10)}...${address.substring(address.length - 10, address.length)}`
       setShortAddress(shortAddr)
 
     }
@@ -755,14 +756,15 @@ export const RecruitProvider = ({ children }) => {
       await transaction.wait();
       console.log(`Success - ${transaction.hash}`);
       setShowBuyOptions(false)
-      await loadNftInfo(currentAccount)
       const dialog = {
         title: "Success Free mint",
         message: 'Your recruit was minted successfully !',
         type: 'success'
       }
+      window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
       setDialog(dialog)
       setIsLoading(false);
+     
 
     } catch (error) {
       const dialog = {
@@ -872,7 +874,7 @@ export const RecruitProvider = ({ children }) => {
       console.log(`Success - ${transaction.hash}`);
 
       setShowBuyOptions(false)
-      await loadNftInfo(currentAccount)
+      window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
       const dialog = {
         title: "Success mint",
         message: 'Your recruit was minted successfully !',
@@ -933,7 +935,7 @@ export const RecruitProvider = ({ children }) => {
       logOut()
       return;
     }
-    if (!availableFreeLevel || (typeof (canLevelUp) == "undefined")) {
+    if (!availableFreeLevel || (typeof (availableFreeLevel) == "undefined")) {
       const dialog = {
         title: "Can no upgrade",
         message: "No free upgrade available",
@@ -989,7 +991,7 @@ export const RecruitProvider = ({ children }) => {
         canLevelUp: currentLevel > 0 ? true : false,
         level: currentLevel
       })
-      await loadNftInfo(currentAccount)
+      window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
       setIsLoading(false);
       const dialog = {
         title: "Level updated.",
@@ -997,6 +999,7 @@ export const RecruitProvider = ({ children }) => {
         type: 'success'
       }
       setDialog(dialog)
+      handleTokenSelection(null)
     }
     catch (error) {
       console.log(error);
@@ -1079,7 +1082,8 @@ export const RecruitProvider = ({ children }) => {
         type: 'success'
       }
       setDialog(dialog)
-      await loadNftInfo(currentAccount)
+      window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
+      handleTokenSelection(null)
     }
     catch (error) {
       console.log(error);
@@ -1139,8 +1143,8 @@ export const RecruitProvider = ({ children }) => {
                 id: token.toNumber(),
                 level: level,
                 wasFreeMinted: wasFreeMinted,
-                url: url,
-                title: level === 4 ? "LIEUTENANT" : level === 3 ? "2ND OFFICER" : level === 2 ? "1ST OFFICER" : "RECRUIT"
+                url: `https://ipfs.io/ipfs/QmbKuVUDpuKyitzMNMbC9c2ijefZ8yQhLk7cK1yDwJ5boD/level${level}/${token.toNumber()}.jpeg`,
+                title: level === 4 ? "LIEUTENANT" : level === 3 ? "1ST OFFICER" : level === 2 ? "2ND OFFICER" : "RECRUIT"
               })
 
               setRecruits(recruits)

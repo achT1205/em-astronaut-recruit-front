@@ -213,14 +213,6 @@ export default function Registration() {
               </div>
             </article>
           </section>
-          <a
-            onClick={() => push('/')}
-            className="fc-white fw-bold continue-website"
-          >
-            <span>Continue to the website</span>
-            <i className="xicon icon-arrow_right"></i>
-
-          </a>
         </main>
       </div>
       );
