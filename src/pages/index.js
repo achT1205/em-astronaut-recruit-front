@@ -393,10 +393,10 @@ export default function Home() {
                   <img src="/images/avatar-img1.png" alt="" className="m-auto" />
                 </div>
                 <div className="col-lg-3 col-md-6">
-                  <img src="/images/avatar-img2.png" alt="" className="m-auto" />
+                  <img src="/images/avatar-img3.png" alt="" className="m-auto" />
                 </div>
                 <div className="col-lg-3 col-md-6">
-                  <img src="/images/avatar-img3.png" alt="" className="m-auto" />
+                  <img src="/images/avatar-img2.png" alt="" className="m-auto" />
                 </div>
                 <div className="col-lg-3 col-md-6">
                   <img src="/images/avatar-img4.png" alt="" className="m-auto" />
@@ -409,10 +409,10 @@ export default function Home() {
                 <img src="/images/mobile-avatar-img1.png" alt="" />
               </div>
               <div>
-                <img src="/images/mobile-avatar-img2.png" alt="" />
+                <img src="/images/mobile-avatar-img3.png" alt="" />
               </div>
               <div>
-                <img src="/images/mobile-avatar-img3.png" alt="" />
+                <img src="/images/mobile-avatar-img2.png" alt="" />
               </div>
               <div>
                 <img src="/images/mobile-avatar-img4.png" alt="" />
@@ -420,8 +420,6 @@ export default function Home() {
             </div>
           </article>
         </section>
-
-
         <section className="benefits-section sec-padding">
           <div className="container">
             <article className="">
