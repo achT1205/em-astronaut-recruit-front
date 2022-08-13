@@ -183,8 +183,8 @@ export default function Admin() {
                                         <Form.Label>Select a level </Form.Label>
                                         <Form.Select onChange={(e) => handleChange(e, 'level')} >
                                             <option>Select a level</option>
-                                            <option value="2">1ST OFFICER</option>
-                                            <option value="3">2ND OFFICER</option>
+                                            <option value="2">2ND OFFICER</option>
+                                            <option value="3">1ST OFFICER</option>
                                             <option value="4">LIEUTENANT</option>
                                         </Form.Select>
                                     </Form.Group>

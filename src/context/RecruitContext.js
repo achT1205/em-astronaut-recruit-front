@@ -765,7 +765,7 @@ export const RecruitProvider = ({ children }) => {
         message: 'Your recruit was minted successfully !',
         type: 'success'
       }
-      window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
+      window.location.href = `${process.env.NEXTAUTH_URL}`;
       setDialog(dialog)
       setIsLoading(false);
 
