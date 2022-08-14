@@ -3,6 +3,7 @@ import { signIn, signOut } from "next-auth/react";
 import { providers, ethers } from 'ethers'
 import axios from "axios";
 import { recruitABI } from "../constants/abi";
+import { whiteListUser } from "../constants/users";
 import Web3Modal from "web3modal";
 
 const ERROR_LIST = [
@@ -49,7 +50,6 @@ let web3Modal;
 export const apiClient = axios.create(config);
 //export const twitterClient = axios.create(twitterConfig);
 //apiClient.defaults.headers.common['Authorization'] = process.env.NEXT_PUBLIC_API_KEY;
-
 const getRecruitContract = () => {
   const contact = new ethers.Contract(
     process.env.NEXT_PUBLIC_CONTRACT_ADDRESS,
@@ -192,6 +192,7 @@ export const RecruitProvider = ({ children }) => {
         type: 'success'
       }
       setDialog(dialog)
+      window.location.href = process.env.NEXTAUTH_URL;
     } catch (error) {
       console.log(error);
       const dialog = {
@@ -507,6 +508,48 @@ export const RecruitProvider = ({ children }) => {
     }
   }
 
+
+  const loadBatchUser = async () => {
+    setDialog(null)
+    setIsLoading(true)
+
+    if (!isOperator) {
+      const dialog = {
+        title: "Forbidden",
+        message: 'Only operator can do this action',
+        type: 'danger'
+      }
+      setDialog(dialog)
+      setIsLoading(false)
+      return
+    }
+
+    try {
+
+      const responses = await Promise.all(
+        whiteListUser.map(async id => {
+          const resp = await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true , isVip: true})
+        })
+      );
+
+      const dialog = {
+        title: "Success Operation",
+        message: 'users uploaded',
+        type: 'success'
+      }
+      setDialog(dialog)
+      setIsLoading(false);
+    } catch (error) {
+      const dialog = {
+        title: "ERROR",
+        message: formatError(error),
+        type: 'danger'
+      }
+      setDialog(dialog)
+      console.log(error);
+    }
+  }
+
   const handleSignIn = async (authProvider) => {
     setDialog(null)
     if (!provider) {
@@ -624,7 +667,7 @@ export const RecruitProvider = ({ children }) => {
 
       setIsListed(false);
       setCurrentAccount(address);
-      const shortAddr = `${address.substring(0, 6)}...${address.substring(address.length - 6, address.length)}`
+      const shortAddr = `${address.substring(0, 10)}...${address.substring(address.length - 10, address.length)}`
       setShortAddress(shortAddr)
 
     }
@@ -732,6 +775,10 @@ export const RecruitProvider = ({ children }) => {
       !freemintSignature.data ||
       !freemintSignature.data.hashedMessage) {
       const error = freemintSignature.data.message
+      if (error === "did not complete profile yet.") {
+        window.location.href = `${process.env.NEXTAUTH_URL}registration`;
+        return
+      }
       console.log(error);
       const dialog = {
         title: "ERROR",
@@ -756,14 +803,15 @@ export const RecruitProvider = ({ children }) => {
       await transaction.wait();
       console.log(`Success - ${transaction.hash}`);
       setShowBuyOptions(false)
-      await loadNftInfo(currentAccount)
       const dialog = {
         title: "Success Free mint",
         message: 'Your recruit was minted successfully !',
         type: 'success'
       }
+      window.location.href = `${process.env.NEXTAUTH_URL}`;
       setDialog(dialog)
       setIsLoading(false);
+
 
     } catch (error) {
       const dialog = {
@@ -873,7 +921,7 @@ export const RecruitProvider = ({ children }) => {
       console.log(`Success - ${transaction.hash}`);
 
       setShowBuyOptions(false)
-      await loadNftInfo(currentAccount)
+      window.location.href = `${process.env.NEXTAUTH_URL}`;
       const dialog = {
         title: "Success mint",
         message: 'Your recruit was minted successfully !',
@@ -934,10 +982,26 @@ export const RecruitProvider = ({ children }) => {
       logOut()
       return;
     }
-    if (!availableFreeLevel || (typeof (canLevelUp) == "undefined")) {
+    if (!availableFreeLevel || (typeof (availableFreeLevel) == "undefined")) {
       const dialog = {
         title: "Can no upgrade",
         message: "No free upgrade available",
+        type: 'danger'
+      }
+      console.log(dialog)
+      setIsLoading(false);
+      setDialog(dialog)
+      return;
+    }
+
+    if (selectedToken.level == maxLevel) {
+      return;
+    }
+
+    if (selectedToken.level !== (availableFreeLevel - 1)) {
+      const dialog = {
+        title: "Can no upgrade",
+        message: "Can only upgrade one level at the time",
         type: 'danger'
       }
       console.log(dialog)
@@ -971,7 +1035,17 @@ export const RecruitProvider = ({ children }) => {
       level = levelUpSignature.data.level;
     }
 
+
+
     try {
+
+      await apiClient.put(`/players/${currentAccount}`, {
+        walletId: currentAccount,
+        canLevelUp: false,
+        level: 0
+      })
+
+
       const recruitContract = getRecruitContract();
       const messageHashBinary = Buffer.from(hashedMessage, 'base64')
       const transaction = await recruitContract.levelUp(
@@ -979,18 +1053,13 @@ export const RecruitProvider = ({ children }) => {
         signature,
         timestamp,
         selectedToken.id,
-        1);
+        level);
       setIsLoading(true);
       console.log(`Loading - ${transaction.hash}`);
       await transaction.wait();
       console.log(`Success - ${transaction.hash}`);
-      const currentLevel = parseInt(level) - 1;
-      await apiClient.put(`/players/${currentAccount}`, {
-        walletId: currentAccount,
-        canLevelUp: currentLevel > 0 ? true : false,
-        level: currentLevel
-      })
-      await loadNftInfo(currentAccount)
+
+      window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
       setIsLoading(false);
       const dialog = {
         title: "Level updated.",
@@ -998,6 +1067,7 @@ export const RecruitProvider = ({ children }) => {
         type: 'success'
       }
       setDialog(dialog)
+      handleTokenSelection(null)
     }
     catch (error) {
       console.log(error);
@@ -1080,7 +1150,8 @@ export const RecruitProvider = ({ children }) => {
         type: 'success'
       }
       setDialog(dialog)
-      await loadNftInfo(currentAccount)
+      window.location.href = `${process.env.NEXTAUTH_URL}nfts`;
+      handleTokenSelection(null)
     }
     catch (error) {
       console.log(error);
@@ -1140,8 +1211,8 @@ export const RecruitProvider = ({ children }) => {
                 id: token.toNumber(),
                 level: level,
                 wasFreeMinted: wasFreeMinted,
-                url: url,
-                title: level === 4 ? "LIEUTENANT" : level === 3 ? "2ND OFFICER" : level === 2 ? "1ST OFFICER" : "RECRUIT"
+                url: `https://ipfs.io/ipfs/QmbKuVUDpuKyitzMNMbC9c2ijefZ8yQhLk7cK1yDwJ5boD/level${level}/${token.toNumber()}.jpeg`,
+                title: level === 4 ? "LIEUTENANT" : level === 3 ? "1ST OFFICER" : level === 2 ? "2ND OFFICER" : "RECRUIT"
               })
 
               setRecruits(recruits)
@@ -1236,6 +1307,7 @@ export const RecruitProvider = ({ children }) => {
         addOperator,
         setShowBuyOptions,
         withdraw,
+        loadBatchUser,
         setFormData
       }}
     >

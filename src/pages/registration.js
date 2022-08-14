@@ -106,7 +106,7 @@ export default function Registration() {
               <h2 className="title">GET A FREE NFT </h2>
 
               <p className="desc fs-large text-center fc-white tt-uppercase">
-                Register with ASTRO MUST and get free NFT for minting 
+                Register with AstroMust and get free NFT for minting 
               </p>
 
               <p className="desc ff-secondary mtpx-40 fs-medium text-center fc-white tt-uppercase">
@@ -213,14 +213,6 @@ export default function Registration() {
               </div>
             </article>
           </section>
-          <a
-            onClick={() => push('/')}
-            className="fc-white fw-bold continue-website"
-          >
-            <span>Continue to the website</span>
-            <i className="xicon icon-arrow_right"></i>
-
-          </a>
         </main>
       </div>
       );

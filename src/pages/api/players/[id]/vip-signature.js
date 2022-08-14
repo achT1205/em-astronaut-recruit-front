@@ -13,10 +13,10 @@ export default async function handler(req, res) {
         });
 
         if (!Item)
-            return res.status(200).json({ message: "not listed yet for the first 24h sale." });
+            return res.status(200).json({ message: "Not listed yet for the first 24h sale." });
         else
             if (!Item.isVip)
-                return res.status(200).json({ message: "not listed yet for VIP sale." });
+                return res.status(200).json({ message: "Not listed yet for the first 24h sale." });
 
 
         const now = Math.floor(Date.now() / 1000);
