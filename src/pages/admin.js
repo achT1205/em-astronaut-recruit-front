@@ -297,25 +297,25 @@ export default function Admin() {
                             <div className="col-lg-4">
                                 <ul className="unstyled footer-links">
                                     <li>
-                                        <Link href="#">
-                                            <a>Astro Must Main Website</a>
+                                        <Link href="https://astromust.com/">
+                                            <a>AstroMust Main Website</a>
                                         </Link>
                                     </li>
-                                    <li>
-                                        <Link href="#">
-                                            <a>FAQ</a>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#">
-                                            <a>Contact</a>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#">
-                                            <a>Blog</a>
-                                        </Link>
-                                    </li>
+                                    {/* <li>
+                    <Link href="#">
+                      <a>FAQ</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <a>Contact</a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <a>Blog</a>
+                    </Link>
+                  </li> */}
                                 </ul>
                             </div>
                         </div>

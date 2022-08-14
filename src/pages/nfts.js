@@ -215,7 +215,7 @@ export default function Nfts() {
                                 <Row>
 
                                     <Row>
-                                        <h6 className="mtpx-60 text-center fc-white margin-bottom-40">{availableFreeLevel == maxLevel ? "LIEUTENANT LEVEL AVAILABLE" : availableFreeLevel == (maxLevel - 1) ? "1ST OFFICER LEVEL AVAILABLE" : availableFreeLevel == (maxLevel - 2) ? "2ND OFFICER LEVEL AVAILABLE" : "NO FREE UPGRADE AVAILABE"}</h6>
+                                        <h6 className="mtpx-60 text-center fc-white margin-bottom-40">{availableFreeLevel == maxLevel ? "LIEUTENANT LEVEL AVAILABLE" : availableFreeLevel == (maxLevel - 1) ? "1ST OFFICER LEVEL AVAILABLE" : availableFreeLevel == (maxLevel - 2) ? "2ND OFFICER LEVEL AVAILABLE" : "NO FREE UPGRADE AVAILABLE"}</h6>
                                     </Row>
                                     <Row>
                                         <div className="d-flex align-items-center justify-content-around">
@@ -324,25 +324,25 @@ export default function Nfts() {
                             <div className="col-lg-4">
                                 <ul className="unstyled footer-links">
                                     <li>
+                                        <Link href="https://astromust.com/">
+                                            <a>AstroMust Main Website</a>
+                                        </Link>
+                                    </li>
+                                    {/* <li>
                                         <Link href="#">
-                                            <a>Astro Must Main Website</a>
+                                        <a>FAQ</a>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link href="#">
-                                            <a>FAQ</a>
+                                        <a>Contact</a>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link href="#">
-                                            <a>Contact</a>
+                                        <a>Blog</a>
                                         </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#">
-                                            <a>Blog</a>
-                                        </Link>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                         </div>

@@ -1003,7 +1003,7 @@ export const RecruitProvider = ({ children }) => {
     if (selectedToken.level !== (availableFreeLevel - 1)) {
       const dialog = {
         title: "Can no upgrade",
-        message: "Can only upgrate to one level at the time",
+        message: "Can only upgrade one level at the time",
         type: 'danger'
       }
       console.log(dialog)

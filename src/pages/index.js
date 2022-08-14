@@ -267,7 +267,7 @@ export default function Home() {
               <div className="col-md-6">
                 <h2 className="maintitle">THE COLLECTION</h2>
                 <p className="maindesc">
-                  It&apos;s time! Hone your skills and prepare yourselves for the future. The Recruit Collection is a Free Mint for ALL, and your entry pass into the Astro Must ecosystem. <br /><br />
+                  It&apos;s time! Hone your skills and prepare yourselves for the future. The Recruit Collection is a Free Mint for ALL, and your entry pass into the AstroMust ecosystem. <br /><br />
                   <strong>1 free mint + gas per wallet. </strong> <br />
                   Once you mint your Recruit, you &apos;MUST&apos; join us on discord to rank up your Recruit to Lieutenant! <br /><br />
                   We are waiting for you….
@@ -353,7 +353,7 @@ export default function Home() {
                   <div className="content">
                     <h4 className="title tt-uppercase">Rewards</h4>
                     <p className="desc">
-                      $1 million to be won by the first Astro Must on the moon. 20% of revenue goes to our players as in-game rewards. Yes, you heard that right. $1m IRL for the first MUST on the moon!
+                      $1 million to be won by the first AstroMust on the moon. 20% of revenue goes to our players as in-game rewards. Yes, you heard that right. $1m IRL for the first MUST on the moon!
                     </p>
                   </div>
                 </div>
@@ -520,7 +520,7 @@ export default function Home() {
               <h2 className="maintitle">ULTIMATE GOAL</h2>
               <p className="maindesc">
                 <strong>SPACE</strong> - with the right gear, the correct equipment, and the most skilled workforce. <br /><br />
-                Astro Must is a revolutionary gaming project with a robust Web3 culture. We create innovative gamefi concepts to shake up the industry. <br />
+                AstroMust is a revolutionary gaming project with a robust Web3 culture. We create innovative gamefi concepts to shake up the industry. <br />
                 The first-ever Play-to-Mint game on the App store. The first &apos;Open door&apos; NFT collection. The first NFT training roadmap and much, <strong>MUST</strong> more….
               </p>
             </article>
@@ -554,11 +554,11 @@ export default function Home() {
               <div className="col-md-6">
                 <ul className="unstyled footer-links">
                   <li>
-                    <Link href="#">
-                      <a>Astro Must Main Website</a>
+                    <Link href="https://astromust.com/">
+                      <a>AstroMust Main Website</a>
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link href="#">
                       <a>FAQ</a>
                     </Link>
@@ -572,7 +572,7 @@ export default function Home() {
                     <Link href="#">
                       <a>Blog</a>
                     </Link>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 
