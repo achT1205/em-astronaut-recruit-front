@@ -267,41 +267,16 @@ export default function Admin() {
                 </section>
 
                 <section className="primary-footer">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-2">
-                                <ul className="unstyled social-media">
-                                    <li>
-                                        <a href="#">
-                                            <img src="/images/discord.svg" alt="" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="/images/facebook.svg" alt="" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="/images/instagram.svg" alt="" />
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="/images/twitter.svg" alt="" />
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div className="col-lg-4">
-                                <ul className="unstyled footer-links">
-                                    <li>
-                                        <Link href="https://astromust.com/">
-                                            <a>AstroMust Main Website</a>
-                                        </Link>
-                                    </li>
-                                    {/* <li>
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6">
+                <ul className="unstyled footer-links">
+                  <li>
+                    <Link href="https://astromust.com/">
+                      <a>AstroMust Main Website</a>
+                    </Link>
+                  </li>
+                  {/* <li>
                     <Link href="#">
                       <a>FAQ</a>
                     </Link>
@@ -316,11 +291,43 @@ export default function Admin() {
                       <a>Blog</a>
                     </Link>
                   </li> */}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                </ul>
+              </div>
+              <div className="col-md-6">
+                <ul className="unstyled inline social-media">
+                  <li>
+                    <Link href="https://discord.com/invite/astromust">
+                      <a target="_blank">
+                        <img src="/images/discord.svg" alt="" />
+                      </a>
+                    </Link>
+                  </li>
+                  {/* <li>
+                    <Link href="#">
+                      <a target="_blank">
+                        <img src="/images/facebook.svg" alt="" />
+                      </a>
+                    </Link>
+                  </li> */}
+                  <li>
+                    <Link href="https://www.instagram.com/astro_must/">
+                      <a target="_blank">
+                        <img src="/images/instagram.svg" alt="" />
+                      </a>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="https://twitter.com/Astro_Must">
+                      <a target="_blank">
+                        <img src="/images/twitter.svg" alt="" />
+                      </a>
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
             </div>
         </>
     )

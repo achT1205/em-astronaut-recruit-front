@@ -575,7 +575,6 @@ export default function Home() {
                   </li> */}
                 </ul>
               </div>
-
               <div className="col-md-6">
                 <ul className="unstyled inline social-media">
                   <li>
@@ -585,13 +584,13 @@ export default function Home() {
                       </a>
                     </Link>
                   </li>
-                  <li>
+                  {/* <li>
                     <Link href="#">
                       <a target="_blank">
                         <img src="/images/facebook.svg" alt="" />
                       </a>
                     </Link>
-                  </li>
+                  </li> */}
                   <li>
                     <Link href="https://www.instagram.com/astro_must/">
                       <a target="_blank">
@@ -608,8 +607,6 @@ export default function Home() {
                   </li>
                 </ul>
               </div>
-
-
             </div>
           </div>
         </section>
