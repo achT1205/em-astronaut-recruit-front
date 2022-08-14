@@ -3,6 +3,7 @@ import { signIn, signOut } from "next-auth/react";
 import { providers, ethers } from 'ethers'
 import axios from "axios";
 import { recruitABI } from "../constants/abi";
+import { whiteListUser } from "../constants/users";
 import Web3Modal from "web3modal";
 
 const ERROR_LIST = [
@@ -492,6 +493,50 @@ export const RecruitProvider = ({ children }) => {
       const dialog = {
         title: "Success Operation",
         message: 'Withdrawed funds',
+        type: 'success'
+      }
+      setDialog(dialog)
+      setIsLoading(false);
+    } catch (error) {
+      const dialog = {
+        title: "ERROR",
+        message: formatError(error),
+        type: 'danger'
+      }
+      setDialog(dialog)
+      console.log(error);
+    }
+  }
+
+
+  const loadBatchUser = async () => {
+
+
+    setDialog(null)
+    setIsLoading(true)
+
+    if (!isOperator) {
+      const dialog = {
+        title: "Forbidden",
+        message: 'Only operator can do this action',
+        type: 'danger'
+      }
+      setDialog(dialog)
+      setIsLoading(false)
+      return
+    }
+
+    try {
+
+      const responses = await Promise.all(
+        whiteListUser.map(async id => {
+          const resp = await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true })
+        })
+      );
+
+      const dialog = {
+        title: "Success Operation",
+        message: 'users uploaded',
         type: 'success'
       }
       setDialog(dialog)
@@ -1264,6 +1309,7 @@ export const RecruitProvider = ({ children }) => {
         addOperator,
         setShowBuyOptions,
         withdraw,
+        loadBatchUser,
         setFormData
       }}
     >

@@ -23,6 +23,7 @@ export default function Admin() {
         addOperator,
         handleChange,
         withdraw,
+        loadBatchUser,
         isLoading,
         formData
     } = useContext(RecruitContext);
@@ -221,6 +222,24 @@ export default function Admin() {
                                         <img src="/images/white-button.svg" alt="" />
                                         <span className="text d-flex align-items-center justify-content-center">
                                             <span className="text">{isLoading ? 'Loading...' : 'Submit'}</span>
+                                        </span>
+                                    </a>
+                                </div>
+                            </Form>
+                        </Row>
+                    </Container>
+                </section>
+
+                <section className="hero-banner mt-50">
+                    <Container >
+                        <h5>Loard WL players</h5>
+                        <Row>
+                            <Form>
+                                <div className="d-flex align-items-center justify-content-around">
+                                    <a className="button --white-button" style={{ cursor: "pointer" }} onClick={loadBatchUser} disabled={isLoading} >
+                                        <img src="/images/white-button.svg" alt="" />
+                                        <span className="text d-flex align-items-center justify-content-center">
+                                            <span className="text">{isLoading ? 'Loading...' : 'load batch user'}</span>
                                         </span>
                                     </a>
                                 </div>
