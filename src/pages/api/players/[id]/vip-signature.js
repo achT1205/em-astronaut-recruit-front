@@ -6,17 +6,17 @@ export default async function handler(req, res) {
     const { id } = req.query
     try {
 
-        const { Item } = await db.get({
-            Key: {
-                walletId: id
-            }
-        });
+        // const { Item } = await db.get({
+        //     Key: {
+        //         walletId: id
+        //     }
+        // });
 
-        if (!Item)
-            return res.status(200).json({ message: "Not listed yet for the first 24h sale." });
-        else
-            if (!Item.isVip)
-                return res.status(200).json({ message: "Not listed yet for the first 24h sale." });
+        // if (!Item)
+        //     return res.status(200).json({ message: "Not listed yet for the first 24h sale." });
+        // else
+        //     if (!Item.isVip)
+        //         return res.status(200).json({ message: "Not listed yet for the first 24h sale." });
 
 
         const now = Math.floor(Date.now() / 1000);

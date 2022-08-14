@@ -513,53 +513,58 @@ export const RecruitProvider = ({ children }) => {
     setDialog(null)
     setIsLoading(true)
 
-    if (!isOperator) {
-      const dialog = {
-        title: "Forbidden",
-        message: 'Only operator can do this action',
-        type: 'danger'
-      }
-      setDialog(dialog)
-      setIsLoading(false)
-      return
-    }
+    // if (!isOperator) {
+    //   const dialog = {
+    //     title: "Forbidden",
+    //     message: 'Only operator can do this action',
+    //     type: 'danger'
+    //   }
+    //   setDialog(dialog)
+    //   setIsLoading(false)
+    //   return
+    // }
 
     try {
 
+      for (let index = 0; index < whiteListUser.length - 1; index++) {
+        await apiClient.put(`/players/${whiteListUser[index]}`, { walletId: whiteListUser[index], goldenVip: true, isVip: true, hasFinishedGame: true })
 
-      const users1 = whiteListUser.slice(0, 1000)
-      const users2 = whiteListUser.slice(1001, 2000)
-      const users3 = whiteListUser.slice(2001, 3000)
-      const users4 = whiteListUser.slice(3001, 4000)
-      const users5 = whiteListUser.slice(4001, whiteListUser.length - 1)
+      }
 
 
-      await Promise.all(
-        users1.map(async id => {
-          await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
-        })
-      );
+      // const users1 = whiteListUser.slice(0, 1000)
+      // const users2 = whiteListUser.slice(1001, 2000)
+      // const users3 = whiteListUser.slice(2001, 3000)
+      // const users4 = whiteListUser.slice(3001, 4000)
+      // const users5 = whiteListUser.slice(4001, whiteListUser.length - 1)
 
-      await Promise.all(
-        users2.map(async id => {
-          await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
-        })
-      );
-      await Promise.all(
-        users3.map(async id => {
-          await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
-        })
-      );
-      await Promise.all(
-        users4.map(async id => {
-          await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
-        })
-      );
-      await Promise.all(
-        users5.map(async id => {
-          await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
-        })
-      );
+
+      // await Promise.all(
+      //   users1.map(async id => {
+      //     await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
+      //   })
+      // );
+
+      // await Promise.all(
+      //   users2.map(async id => {
+      //     await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
+      //   })
+      // );
+      // await Promise.all(
+      //   users3.map(async id => {
+      //     await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
+      //   })
+      // );
+      // await Promise.all(
+      //   users4.map(async id => {
+      //     await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
+      //   })
+      // );
+      // await Promise.all(
+      //   users5.map(async id => {
+      //     await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true, isVip: true })
+      //   })
+      // );
 
       const dialog = {
         title: "Success Operation",
