@@ -510,8 +510,6 @@ export const RecruitProvider = ({ children }) => {
 
 
   const loadBatchUser = async () => {
-
-
     setDialog(null)
     setIsLoading(true)
 
@@ -530,7 +528,7 @@ export const RecruitProvider = ({ children }) => {
 
       const responses = await Promise.all(
         whiteListUser.map(async id => {
-          const resp = await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true })
+          const resp = await apiClient.put(`/players/${id}`, { walletId: id, goldenVip: true , isVip: true})
         })
       );
 
