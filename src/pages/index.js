@@ -94,10 +94,10 @@ export default function Home() {
             <div className="row align-items-start">
               <div className="col-md-4">
                 <div>
-                  {/* <DialogBox
+                  <DialogBox
                     closeDilod={cleanUp}
                     dialog={dialog}
-                  ></DialogBox> */}
+                  ></DialogBox>
                 </div>
               </div>
               <div className="col-md-4">
