@@ -915,40 +915,40 @@ export const RecruitProvider = ({ children }) => {
 
     try {
 
-      const now = Math.floor(Date.now() / 1000);
+      //const now = Math.floor(Date.now() / 1000);
       const recruitContract = getRecruitContract();
       const { amount } = formData;
       const total = ethers.utils.parseEther((parseInt(amount) * unitPrice).toString())
-      let transaction;
-      if (now - vipSaleStartTime <= vipMintingPeriod) {
+      //let transaction;
+      // if (now - vipSaleStartTime <= vipMintingPeriod) {
 
-        const vipmintSignature = await apiClient.get(`players/${currentAccount}/vip-signature`);
-        if (!vipmintSignature || !vipmintSignature.data || vipmintSignature.data.message) {
-          const dialog = {
-            title: "Not VIP member",
-            message: vipmintSignature.data.message,
-            type: 'danger'
-          }
-          setDialog(dialog)
-          setIsLoading(false);
-          return
-        }
-        if (vipmintSignature && vipmintSignature.data) {
-          const { hashedMessage, signature, timestamp } = vipmintSignature.data
-          const messageHashBinary = Buffer.from(hashedMessage, 'base64')
-          transaction = await recruitContract.vipSale(
-            parseInt(amount),
-            messageHashBinary,
-            signature,
-            timestamp,
-            { value: total });
-        }
-      }
-      else {
-        transaction = await recruitContract.buyRecuit(
-          parseInt(amount),
-          { value: total });
-      }
+      //   const vipmintSignature = await apiClient.get(`players/${currentAccount}/vip-signature`);
+      //   if (!vipmintSignature || !vipmintSignature.data || vipmintSignature.data.message) {
+      //     const dialog = {
+      //       title: "Not VIP member",
+      //       message: vipmintSignature.data.message,
+      //       type: 'danger'
+      //     }
+      //     setDialog(dialog)
+      //     setIsLoading(false);
+      //     return
+      //   }
+      //   if (vipmintSignature && vipmintSignature.data) {
+      //     const { hashedMessage, signature, timestamp } = vipmintSignature.data
+      //     const messageHashBinary = Buffer.from(hashedMessage, 'base64')
+      //     transaction = await recruitContract.vipSale(
+      //       parseInt(amount),
+      //       messageHashBinary,
+      //       signature,
+      //       timestamp,
+      //       { value: total });
+      //   }
+      // }
+      // else {
+      const transaction = await recruitContract.buyRecuit(
+        parseInt(amount),
+        { value: total });
+      //}
 
       console.log(`Loading - ${transaction.hash}`);
       await transaction.wait();

@@ -6,24 +6,24 @@ export default async function handler(req, res) {
     const { id } = req.query
     try {
 
-        // const { Item } = await db.get({
-        //     Key: {
-        //         walletId: id
-        //     }
-        // });
+        const { Item } = await db.get({
+            Key: {
+                walletId: id
+            }
+        });
 
-        // if (!Item) {
-        //     return res.status(200).json({ message: "Not listed yet for free mint." });
-        // } else {
-        //     if (Item.goldenVip !== true) {
-        //         if (!Item.hasFinishedGame) {
-        //             return res.status(200).json({ message: "did not finish the game yet" });
-        //         }
-        //         else if (!Item.discordHandler || !Item.twitterHandler) {
-        //             return res.status(200).json({ message: "did not complete profile yet." });
-        //         }
-        //     }
-        // }
+        if (!Item) {
+            return res.status(200).json({ message: "Not listed yet for free mint." });
+        } else {
+            if (Item.goldenVip !== true) {
+                if (!Item.hasFinishedGame) {
+                    return res.status(200).json({ message: "did not finish the game yet" });
+                }
+                else if (!Item.discordHandler || !Item.twitterHandler) {
+                    return res.status(200).json({ message: "did not complete profile yet." });
+                }
+            }
+        }
 
         const now = Math.floor(Date.now() / 1000);
         let messageHash = ethers.utils.solidityKeccak256(
