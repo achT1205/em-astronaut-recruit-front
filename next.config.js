@@ -21,5 +21,4 @@ const nextConfig = {
     PLAYER_TABLE: process.env.PLAYER_TABLE,
   }
 }
-
 module.exports = nextConfig
