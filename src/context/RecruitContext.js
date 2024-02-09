@@ -640,6 +640,7 @@ export const RecruitProvider = ({ children }) => {
   const connectWallet = useCallback(async () => {
     setDialog(null)
     try {
+      debugger;
       web3Modal = new Web3Modal()
       const connection = await web3Modal.connect()
       provider = new providers.Web3Provider(connection)
