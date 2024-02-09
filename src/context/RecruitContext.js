@@ -708,6 +708,7 @@ export const RecruitProvider = ({ children }) => {
     }
 
     catch (error) {
+      debugger
       console.log(error);
       const dialog = {
         title: "METAMASK ERROR",
