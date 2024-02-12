@@ -141,7 +141,7 @@ export default function Home() {
         <section className="hero-banner">
           <div className="container">
             <article className="inner-content">
-              <h2 className="maintitle">THE RECRUITS</h2>
+              <h2 className="maintitle">THE RECRUITS  tableName: {process.env.PLAYER_TABLE}, ChaineId: {process.env.NEXT_PUBLIC_CHAIN_ID}</h2>
               <p className="subtitle">
                 The Million Dollar Mission <br />
                 The mines of the moon are plentiful and we MUST organize to win. <br />
