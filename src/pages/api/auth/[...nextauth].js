@@ -3,6 +3,7 @@ import TwitterProvider from "next-auth/providers/twitter"
 import DiscordProvider from "next-auth/providers/discord"
 
 export default NextAuth({
+  secret: process.env.NEXT_PUBLIC_CHAIN_ID,
   providers: [
     TwitterProvider({
       clientId: process.env.TWITTER_ID,
