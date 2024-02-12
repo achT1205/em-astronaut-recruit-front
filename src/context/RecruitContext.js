@@ -640,7 +640,6 @@ export const RecruitProvider = ({ children }) => {
   const connectWallet = useCallback(async () => {
     setDialog(null)
     try {
-      debugger;
       web3Modal = new Web3Modal()
       const connection = await web3Modal.connect()
       provider = new providers.Web3Provider(connection)
@@ -708,11 +707,10 @@ export const RecruitProvider = ({ children }) => {
     }
 
     catch (error) {
-      debugger
       console.log(error);
       const dialog = {
         title: "METAMASK ERROR",
-        message: error.message === "User Rejected" ? "Please connect your METAMASK" : error,
+        message: error.message === "User Rejected" ? "Please connect your METAMASK" : error.message,
         type: 'danger'
       }
       setDialog(dialog)
