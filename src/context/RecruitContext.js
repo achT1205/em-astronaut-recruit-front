@@ -659,7 +659,7 @@ export const RecruitProvider = ({ children }) => {
         return;
       }
       if (address) {
-        const resp = await apiClient.get(`/players/${address}`)
+        const resp = null//await apiClient.get(`/players/${address}`)
         if (resp && resp.data) {
           const { twitterHandler, discordHandler, discordId, twitterId, twitterProfilePicture, discordProfilePicture } = resp.data
           if (typeof window !== "undefined") {
