@@ -644,7 +644,7 @@ export const RecruitProvider = ({ children }) => {
       const connection = await web3Modal.connect()
       provider = new providers.Web3Provider(connection)
       signer = provider.getSigner()
-      const address = await signer.getAddress()
+      const address = '0x19930b92126681B94aA46032104Fa606F2D37B25'//await signer.getAddress()
       const network = await provider.getNetwork()
       const { chainId } = network;
       if (chainId != process.env.NEXT_PUBLIC_CHAIN_ID) {
