@@ -710,7 +710,7 @@ export const RecruitProvider = ({ children }) => {
       console.log(error);
       const dialog = {
         title: "METAMASK ERROR",
-        message: error.message === "User Rejected" ? "Please connect your METAMASK" : error,
+        message: error.message === "User Rejected" ? "Please connect your METAMASK" : JSON.stringify(error),
         type: 'danger'
       }
       setDialog(dialog)
